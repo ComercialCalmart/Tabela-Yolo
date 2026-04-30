@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabela de Preços — CALMART</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:  #000000;
+    --white:  #FFFFFF;
+    --bg:     #F5F5F0;
+    --border: #D0D0CC;
+    --yolo:   #000066;
+    --accent: #0099FF;
+    --gray:   #E6E7E8;
+    --text:   #111111;
+    --muted:  #777777;
+    --green:  #007A3D;
+    --green-bg: #E8F5EE;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--white);
+    font-family: 'DM Sans', Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.4;
+    font-size: 13px;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--black);
+    border-bottom: 3px solid var(--white);
+    padding: 18px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 200;
+  }
+  .logo-area { display: flex; align-items: center; gap: 13px; }
+  .logo-icon {
+    width: 42px; height: 42px;
+    background: var(--black); border: 2px solid var(--white); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; flex-shrink: 0;
+  }
+  .logo-icon .y  { font-weight: 900; font-size: 21px; color: var(--white); letter-spacing: -1px; line-height: 1; }
+  .logo-icon .dot { position: absolute; bottom: 6px; left: 6px; width: 4px; height: 4px; background: var(--white); border-radius: 50%; }
+  .logo-text h1  { font-size: 1rem; font-weight: 900; letter-spacing: 0.28em; text-transform: uppercase; color: var(--white); line-height: 1; }
+  .logo-text p   { font-size: 0.6rem; color: rgba(255,255,255,0.4); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 3px; }
+  .header-tag {
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em;
+    color: var(--accent); text-transform: uppercase;
+    border: 1.5px solid var(--accent); padding: 5px 12px; border-radius: 2px;
+  }
+
+  /* TOOLBAR */
+  .toolbar {
+    background: var(--white); border-bottom: 2px solid var(--black);
+    padding: 12px 28px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .seg-label { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-right: 2px; }
+  .seg-btn {
+    background: var(--white); border: 1.5px solid var(--border);
+    color: var(--muted); font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 2px; cursor: pointer; transition: all 0.12s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .seg-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .seg-btn.active { background: var(--yolo); border-color: var(--yolo); color: var(--white); }
+  .seg-btn .count { font-size: 0.58rem; font-weight: 400; padding: 1px 6px; border-radius: 10px; background: rgba(255,255,255,0.25); }
+  .seg-btn:not(.active) .count { background: var(--gray); color: var(--muted); }
+  .sort-hint { margin-left: auto; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.04em; }
+
+  /* MAIN */
+  main { padding: 0 28px 60px; }
+  .table-meta { padding: 10px 0 6px; font-size: 0.68rem; color: var(--muted); }
+  .table-meta span { color: var(--yolo); font-weight: 700; }
+
+  /* TABLE */
+  .table-wrap { border: 1.5px solid var(--black); border-radius: 2px; overflow: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+
+  thead tr { background: var(--yolo); }
+  thead th {
+    padding: 9px 10px; text-align: left;
+    font-size: 0.56rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55); white-space: nowrap;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    user-select: none; cursor: pointer; transition: background 0.1s;
+  }
+  thead th:last-child { border-right: none; }
+  thead th:hover { background: rgba(0,153,255,0.3); color: #fff; }
+  thead th.sorted-asc, thead th.sorted-desc { background: var(--accent); color: var(--white); }
+  .th-inner { display: flex; align-items: center; gap: 4px; }
+  .th-inner.right { justify-content: flex-end; }
+  .sort-icon { font-size: 0.6rem; opacity: 0.45; }
+  thead th.sorted-asc .sort-icon, thead th.sorted-desc .sort-icon { opacity: 1; }
+
+  .th-50  { color: #aad4ff !important; }
+  .th-100 { color: #c4e2ff !important; }
+  .th-200 { color: #dceeff !important; }
+  .th-500 { color: #ffffff !important; font-weight: 900 !important; }
+
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.08s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:nth-child(even) { background: #F8F8F6; }
+  tbody tr:hover { background: #EEF5FF; }
+  tbody tr.hidden { display: none; }
+
+  td { padding: 8px 10px; border-right: 1px solid var(--border); white-space: nowrap; }
+  td:last-child { border-right: none; }
+
+  td.ref    { font-size: 0.68rem; font-weight: 700; color: var(--muted); letter-spacing: 0.07em; }
+  td.name   { font-weight: 700; color: var(--text); max-width: 130px; overflow: hidden; text-overflow: ellipsis; }
+  td.detail { color: #555; }
+  td.tam span {
+    background: var(--gray); border: 1px solid var(--border);
+    padding: 2px 7px; border-radius: 2px;
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em; color: var(--yolo);
+  }
+  td.sellout { text-align: right; font-weight: 700; color: var(--text); }
+  td.p-base { text-align: right; color: #444; font-weight: 500; }
+  td.p-50   { text-align: right; color: #0066bb; font-weight: 600; }
+  td.p-100  { text-align: right; color: #005099; font-weight: 700; }
+  td.p-200  { text-align: right; color: #003d77; font-weight: 700; }
+  td.p-500  { text-align: right; color: var(--yolo); font-weight: 900; }
+
+  .disc {
+    display: inline-block; font-size: 0.52rem; font-weight: 700;
+    background: var(--green-bg); color: var(--green);
+    padding: 1px 4px; border-radius: 2px; margin-left: 3px; vertical-align: middle;
+  }
+
+  /* INFO BAR */
+  .info-bar {
+    display: flex; margin-top: 14px;
+    border: 1.5px solid var(--black); border-radius: 2px; overflow: hidden; flex-wrap: wrap;
+  }
+  .info-item {
+    flex: 1; min-width: 90px; padding: 11px 14px;
+    border-right: 1px solid var(--border); background: var(--white);
+  }
+  .info-item:last-child { border-right: none; }
+  .info-item .lbl { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
+  .info-item .val { font-size: 0.82rem; font-weight: 900; color: var(--yolo); margin-top: 2px; }
+
+  footer {
+    background: var(--black); color: rgba(255,255,255,0.3); text-align: center;
+    padding: 14px; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-area">
+    <div class="logo-icon"><span class="y">Y</span><span class="dot"></span></div>
+    <div class="logo-text">
+      <h1>CALMART</h1>
+      <p>Tabela de Preços · Pet Products</p>
+    </div>
+  </div>
+  <div class="header-tag">Uso Comercial</div>
+</header>
+
+<div class="toolbar">
+  <span class="seg-label">Segmento:</span>
+  <button class="seg-btn active" data-seg="ALL" onclick="filterSeg(this,'ALL')">Todos <span class="count" id="cnt-ALL">33</span></button>
+  <button class="seg-btn" data-seg="ARRANHADOR MDF" onclick="filterSeg(this,'ARRANHADOR MDF')">Arranhador MDF <span class="count" id="cnt-ARRANHADOR MDF">2</span></button>
+  <button class="seg-btn" data-seg="COLETOR DE AREIA" onclick="filterSeg(this,'COLETOR DE AREIA')">Coletor de Areia <span class="count" id="cnt-COLETOR DE AREIA">16</span></button>
+  <button class="seg-btn" data-seg="GUIA E PEITORAL" onclick="filterSeg(this,'GUIA E PEITORAL')">Guia e Peitoral <span class="count" id="cnt-GUIA E PEITORAL">15</span></button>
+  <span class="sort-hint">⇅ Clique no cabeçalho para ordenar</span>
+</div>
+
+<main>
+  <p class="table-meta">Exibindo <span id="visible-count">33</span> produtos &nbsp;·&nbsp; Preço base = Sell-In Final &nbsp;·&nbsp; Descontos por volume aplicados sobre o base</p>
+  <div class="table-wrap">
+    <table id="main-table">
+      <thead>
+        <tr>
+          <th data-col="ref"     data-type="str" onclick="sortTable(this)"><div class="th-inner">REF <span class="sort-icon">⇅</span></div></th>
+          <th data-col="nome"    data-type="str" onclick="sortTable(this)"><div class="th-inner">Produto <span class="sort-icon">⇅</span></div></th>
+          <th data-col="modelo"  data-type="str" onclick="sortTable(this)"><div class="th-inner">Modelo <span class="sort-icon">⇅</span></div></th>
+          <th data-col="cor"     data-type="str" onclick="sortTable(this)"><div class="th-inner">Cor <span class="sort-icon">⇅</span></div></th>
+          <th data-col="tam"     data-type="tam" onclick="sortTable(this)"><div class="th-inner">Tam. <span class="sort-icon">⇅</span></div></th>
+          <th data-col="sellout" data-type="num" onclick="sortTable(this)"><div class="th-inner right">Sell-Out <span class="sort-icon">⇅</span></div></th>
+          <th data-col="base"    data-type="num" onclick="sortTable(this)"><div class="th-inner right">Base R$ <span class="sort-icon">⇅</span></div></th>
+          <th data-col="p50"     data-type="num" onclick="sortTable(this)" class="th-50"><div class="th-inner right">50 pçs <span class="sort-icon">⇅</span></div></th>
+          <th data-col="p100"    data-type="num" onclick="sortTable(this)" class="th-100"><div class="th-inner right">100 pçs <span class="sort-icon">⇅</span></div></th>
+          <th data-col="p200"    data-type="num" onclick="sortTable(this)" class="th-200"><div class="th-inner right">200 pçs <span class="sort-icon">⇅</span></div></th>
+          <th data-col="p500"    data-type="num" onclick="sortTable(this)" class="th-500"><div class="th-inner right">500 pçs <span class="sort-icon">⇅</span></div></th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+  <div class="info-bar">
+    <div class="info-item"><span class="lbl">Base</span><span class="val">Preço cheio</span></div>
+    <div class="info-item"><span class="lbl">50 pçs</span><span class="val">−3%</span></div>
+    <div class="info-item"><span class="lbl">100 pçs</span><span class="val">−6%</span></div>
+    <div class="info-item"><span class="lbl">200 pçs</span><span class="val">−9%</span></div>
+    <div class="info-item"><span class="lbl">500 pçs</span><span class="val">−13%</span></div>
+    <div class="info-item"><span class="lbl">Embalagem</span><span class="val">Unitário</span></div>
+  </div>
+</main>
+
+<footer>YOLOPET · CALMART Pet Products · ecommerce@calmart.com.br</footer>
+
+<script>
+const TAM_ORDER = {P:1,M:2,G:3,GG:4,EXG:5,'ÚNICO':6};
+
+const products = [
+  {ref:"A36",nome:"ARRANHADOR MDF",modelo:"Juta Natural",cor:"Juta Natural",dim:"17x60",tam:"ÚNICO",sellout:54.9,base:30.2128},
+  {ref:"A37",nome:"ARRANHADOR MDF",modelo:"Carpete",cor:"Marrom",dim:"17x60",tam:"ÚNICO",sellout:54.9,base:30.2128},
+  {ref:"A1",nome:"COLETOR DE AREIA",modelo:"Redondo",cor:"Cinza",dim:"68x100",tam:"EXG",sellout:109.9,base:52.1364},
+  {ref:"A2",nome:"COLETOR DE AREIA",modelo:"Redondo",cor:"Preto",dim:"68x100",tam:"EXG",sellout:109.9,base:52.1364},
+  {ref:"A5",nome:"COLETOR DE AREIA",modelo:"Coração",cor:"Cinza",dim:"68x100",tam:"EXG",sellout:109.9,base:52.1364},
+  {ref:"A6",nome:"COLETOR DE AREIA",modelo:"Coração",cor:"Preto",dim:"68x100",tam:"EXG",sellout:109.9,base:52.1364},
+  {ref:"A1",nome:"COLETOR DE AREIA",modelo:"Redondo",cor:"Cinza",dim:"68x80",tam:"GG",sellout:78.9,base:43.5712},
+  {ref:"A2",nome:"COLETOR DE AREIA",modelo:"Redondo",cor:"Preto",dim:"68x80",tam:"GG",sellout:78.9,base:43.5712},
+  {ref:"A5",nome:"COLETOR DE AREIA",modelo:"Coração",cor:"Cinza",dim:"68x80",tam:"GG",sellout:78.9,base:43.5712},
+  {ref:"A6",nome:"COLETOR DE AREIA",modelo:"Coração",cor:"Preto",dim:"68x80",tam:"GG",sellout:78.9,base:43.5712},
+  {ref:"A1",nome:"COLETOR DE AREIA",modelo:"Redondo",cor:"Cinza",dim:"56x68",tam:"G",sellout:49.9,base:29.0812},
+  {ref:"A2",nome:"COLETOR DE AREIA",modelo:"Redondo",cor:"Preto",dim:"56x68",tam:"G",sellout:49.9,base:29.0812},
+  {ref:"A5",nome:"COLETOR DE AREIA",modelo:"Coração",cor:"Cinza",dim:"56x68",tam:"G",sellout:49.9,base:29.0812},
+  {ref:"A6",nome:"COLETOR DE AREIA",modelo:"Coração",cor:"Preto",dim:"56x68",tam:"G",sellout:49.9,base:29.0812},
+  {ref:"A1",nome:"COLETOR DE AREIA",modelo:"Redondo",cor:"Cinza",dim:"41x59",tam:"M",sellout:39.9,base:22.8252},
+  {ref:"A2",nome:"COLETOR DE AREIA",modelo:"Redondo",cor:"Preto",dim:"41x59",tam:"M",sellout:39.9,base:22.8252},
+  {ref:"A5",nome:"COLETOR DE AREIA",modelo:"Coração",cor:"Cinza",dim:"41x59",tam:"M",sellout:39.9,base:22.8252},
+  {ref:"A6",nome:"COLETOR DE AREIA",modelo:"Coração",cor:"Preto",dim:"41x59",tam:"M",sellout:39.9,base:22.8252},
+  {ref:"A45",nome:"GUIA E PEITORAL",modelo:"Kit",cor:"Onça",dim:"28x40x46",tam:"P",sellout:49.9,base:25.6588},
+  {ref:"A45",nome:"GUIA E PEITORAL",modelo:"Kit",cor:"Onça",dim:"32x46x52",tam:"M",sellout:49.9,base:25.6588},
+  {ref:"A45",nome:"GUIA E PEITORAL",modelo:"Kit",cor:"Onça",dim:"36x52x60",tam:"G",sellout:49.9,base:25.6588},
+  {ref:"A46",nome:"GUIA E PEITORAL",modelo:"Kit",cor:"Pink",dim:"28x40x46",tam:"P",sellout:49.9,base:25.6588},
+  {ref:"A46",nome:"GUIA E PEITORAL",modelo:"Kit",cor:"Pink",dim:"32x46x52",tam:"M",sellout:49.9,base:25.6588},
+  {ref:"A46",nome:"GUIA E PEITORAL",modelo:"Kit",cor:"Pink",dim:"36x52x60",tam:"G",sellout:49.9,base:25.6588},
+  {ref:"A47",nome:"GUIA E PEITORAL",modelo:"Kit",cor:"Preto",dim:"28x40x46",tam:"P",sellout:49.9,base:25.6588},
+  {ref:"A47",nome:"GUIA E PEITORAL",modelo:"Kit",cor:"Preto",dim:"32x46x52",tam:"M",sellout:49.9,base:25.6588},
+  {ref:"A47",nome:"GUIA E PEITORAL",modelo:"Kit",cor:"Preto",dim:"36x52x60",tam:"G",sellout:49.9,base:25.6588},
+  {ref:"A48",nome:"GUIA E PEITORAL",modelo:"Kit",cor:"Azul",dim:"28x40x46",tam:"P",sellout:49.9,base:25.6588},
+  {ref:"A48",nome:"GUIA E PEITORAL",modelo:"Kit",cor:"Azul",dim:"32x46x52",tam:"M",sellout:49.9,base:25.6588},
+  {ref:"A48",nome:"GUIA E PEITORAL",modelo:"Kit",cor:"Azul",dim:"36x52x60",tam:"G",sellout:49.9,base:25.6588},
+  {ref:"A49",nome:"GUIA E PEITORAL",modelo:"Kit",cor:"Vermelho",dim:"28x40x46",tam:"P",sellout:49.9,base:25.6588},
+  {ref:"A49",nome:"GUIA E PEITORAL",modelo:"Kit",cor:"Vermelho",dim:"32x46x52",tam:"M",sellout:49.9,base:25.6588},
+  {ref:"A49",nome:"GUIA E PEITORAL",modelo:"Kit",cor:"Vermelho",dim:"36x52x60",tam:"G",sellout:49.9,base:25.6588},
+];
+
+let currentSeg = 'ALL';
+let sortCol = null;
+let sortDir = 1;
+
+function fmt(v){ return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+function buildTable(data){
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML = '';
+  let visible = 0;
+  data.forEach(p => {
+    const show = currentSeg === 'ALL' || p.nome === currentSeg;
+    if(!show) return;
+    visible++;
+    const tr = document.createElement('tr');
+    tr.dataset.seg = p.nome;
+    tr.innerHTML = `
+      <td class="ref">${p.ref}</td>
+      <td class="name">${p.nome.split(' ').map(w=>w[0]+w.slice(1).toLowerCase()).join(' ')}</td>
+      <td class="detail">${p.modelo}</td>
+      <td class="detail">${p.cor}</td>
+      <td class="tam"><span>${p.tam}</span></td>
+      <td class="sellout">${fmt(p.sellout)}</td>
+      <td class="p-base">${fmt(p.base)}</td>
+      <td class="p-50">${fmt(p.base*0.97)}<span class="disc">-3%</span></td>
+      <td class="p-100">${fmt(p.base*0.94)}<span class="disc">-6%</span></td>
+      <td class="p-200">${fmt(p.base*0.91)}<span class="disc">-9%</span></td>
+      <td class="p-500">${fmt(p.base*0.87)}<span class="disc">-13%</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('visible-count').textContent = visible;
+}
+
+function filterSeg(btn, seg){
+  document.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentSeg = seg;
+  renderSorted();
+}
+
+function sortTable(th){
+  const col = th.dataset.col;
+  const type = th.dataset.type;
+  if(sortCol === col){ sortDir *= -1; }
+  else { sortCol = col; sortDir = 1; }
+  document.querySelectorAll('thead th').forEach(t=>{ t.classList.remove('sorted-asc','sorted-desc'); t.querySelector('.sort-icon').textContent='⇅'; });
+  th.classList.add(sortDir===1 ? 'sorted-asc' : 'sorted-desc');
+  th.querySelector('.sort-icon').textContent = sortDir===1 ? '↑' : '↓';
+  renderSorted();
+}
+
+function renderSorted(){
+  let data = [...products];
+  if(sortCol){
+    data.sort((a,b)=>{
+      let va, vb;
+      if(sortCol==='p50'){va=a.base*0.97;vb=b.base*0.97;}
+      else if(sortCol==='p100'){va=a.base*0.94;vb=b.base*0.94;}
+      else if(sortCol==='p200'){va=a.base*0.91;vb=b.base*0.91;}
+      else if(sortCol==='p500'){va=a.base*0.87;vb=b.base*0.87;}
+      else if(sortCol==='tam'){va=TAM_ORDER[a.tam]||99;vb=TAM_ORDER[b.tam]||99;}
+      else {va=a[sortCol];vb=b[sortCol];}
+      if(typeof va==='string') return va.localeCompare(vb,'pt-BR')*sortDir;
+      return (va-vb)*sortDir;
+    });
+  }
+  buildTable(data);
+}
+
+renderSorted();
+</script>
+</body>
+</html>
