@@ -7,74 +7,71 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black:  #000000;
-    --white:  #FFFFFF;
-    --bg:     #F5F5F0;
-    --border: #D0D0CC;
-    --yolo:   #000066;
-    --accent: #0099FF;
-    --gray:   #E6E7E8;
-    --text:   #111111;
-    --muted:  #777777;
-    --green:  #007A3D;
+    --black:    #000000;
+    --white:    #FFFFFF;
+    --border:   #D0D0CC;
+    --yolo:     #000066;
+    --accent:   #0099FF;
+    --gray:     #E6E7E8;
+    --text:     #111111;
+    --muted:    #777777;
+    --green:    #007A3D;
     --green-bg: #E8F5EE;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--white);
-    font-family: 'DM Sans', Arial, sans-serif;
-    color: var(--text);
-    line-height: 1.4;
-    font-size: 13px;
-  }
+  body { background: var(--white); font-family: 'DM Sans', Arial, sans-serif; color: var(--text); line-height: 1.4; font-size: 13px; }
 
   /* HEADER */
-  header {
-    background: var(--black);
-    border-bottom: 3px solid var(--white);
-    padding: 18px 28px;
-    display: flex; align-items: center; justify-content: space-between;
-    position: sticky; top: 0; z-index: 200;
-  }
+  header { background: var(--black); border-bottom: 3px solid var(--white); padding: 18px 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 200; }
   .logo-area { display: flex; align-items: center; gap: 13px; }
-  .logo-icon {
-    width: 42px; height: 42px;
-    background: var(--black); border: 2px solid var(--white); border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    position: relative; flex-shrink: 0;
-  }
-  .logo-icon .y  { font-weight: 900; font-size: 21px; color: var(--white); letter-spacing: -1px; line-height: 1; }
+  .logo-icon { width: 42px; height: 42px; background: var(--black); border: 2px solid var(--white); border-radius: 10px; display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0; }
+  .logo-icon .y   { font-weight: 900; font-size: 21px; color: var(--white); letter-spacing: -1px; line-height: 1; }
   .logo-icon .dot { position: absolute; bottom: 6px; left: 6px; width: 4px; height: 4px; background: var(--white); border-radius: 50%; }
-  .logo-text h1  { font-size: 1rem; font-weight: 900; letter-spacing: 0.28em; text-transform: uppercase; color: var(--white); line-height: 1; }
-  .logo-text p   { font-size: 0.6rem; color: rgba(255,255,255,0.4); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 3px; }
-  .header-tag {
-    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em;
-    color: var(--accent); text-transform: uppercase;
-    border: 1.5px solid var(--accent); padding: 5px 12px; border-radius: 2px;
-  }
+  .logo-text h1 { font-size: 1rem; font-weight: 900; letter-spacing: 0.28em; text-transform: uppercase; color: var(--white); line-height: 1; }
+  .logo-text p  { font-size: 0.6rem; color: rgba(255,255,255,0.4); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 3px; }
+  .header-tag { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; color: var(--accent); text-transform: uppercase; border: 1.5px solid var(--accent); padding: 5px 12px; border-radius: 2px; }
 
   /* TOOLBAR */
-  .toolbar {
-    background: var(--white); border-bottom: 2px solid var(--black);
-    padding: 12px 28px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-  }
+  .toolbar { background: var(--white); border-bottom: 2px solid var(--black); padding: 12px 28px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .seg-label { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-right: 2px; }
-  .seg-btn {
-    background: var(--white); border: 1.5px solid var(--border);
-    color: var(--muted); font-family: 'DM Sans', sans-serif;
-    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
-    padding: 6px 14px; border-radius: 2px; cursor: pointer; transition: all 0.12s;
-    display: flex; align-items: center; gap: 6px;
-  }
+  .seg-btn { background: var(--white); border: 1.5px solid var(--border); color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 6px 14px; border-radius: 2px; cursor: pointer; transition: all 0.12s; display: flex; align-items: center; gap: 6px; }
   .seg-btn:hover { border-color: var(--accent); color: var(--accent); }
   .seg-btn.active { background: var(--yolo); border-color: var(--yolo); color: var(--white); }
   .seg-btn .count { font-size: 0.58rem; font-weight: 400; padding: 1px 6px; border-radius: 10px; background: rgba(255,255,255,0.25); }
   .seg-btn:not(.active) .count { background: var(--gray); color: var(--muted); }
-  .sort-hint { margin-left: auto; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.04em; }
+  .sort-hint { margin-left: auto; font-size: 0.6rem; color: var(--muted); }
+
+  /* RESUMO */
+  .resumo {
+    margin: 16px 28px 0;
+    border: 2px solid var(--yolo);
+    border-radius: 2px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto;
+  }
+  .resumo-item {
+    padding: 14px 20px;
+    border-right: 1px solid var(--border);
+    background: var(--white);
+  }
+  .resumo-item:last-child { border-right: none; }
+  .resumo-item .r-lbl { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .resumo-item .r-val { font-size: 1.3rem; font-weight: 900; color: var(--yolo); margin-top: 3px; line-height: 1; }
+  .resumo-item .r-val.highlight { color: var(--green); }
+  .resumo-item .r-sub { font-size: 0.62rem; color: var(--muted); margin-top: 3px; }
+  .resumo-reset {
+    background: var(--gray); border: none; cursor: pointer;
+    padding: 0 20px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted); transition: all 0.12s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .resumo-reset:hover { background: #e0e0dc; color: var(--black); }
 
   /* MAIN */
-  main { padding: 0 28px 60px; }
-  .table-meta { padding: 10px 0 6px; font-size: 0.68rem; color: var(--muted); }
+  main { padding: 12px 28px 60px; }
+  .table-meta { padding: 6px 0 6px; font-size: 0.68rem; color: var(--muted); }
   .table-meta span { color: var(--yolo); font-weight: 700; }
 
   /* TABLE */
@@ -87,38 +84,39 @@
     font-size: 0.56rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
     color: rgba(255,255,255,0.55); white-space: nowrap;
     border-right: 1px solid rgba(255,255,255,0.08);
-    user-select: none; cursor: pointer; transition: background 0.1s;
+    user-select: none; transition: background 0.1s;
   }
-  thead th:last-child { border-right: none; }
-  thead th:hover { background: rgba(0,153,255,0.3); color: #fff; }
+  thead th.sortable { cursor: pointer; }
+  thead th.sortable:hover { background: rgba(0,153,255,0.3); color: #fff; }
   thead th.sorted-asc, thead th.sorted-desc { background: var(--accent); color: var(--white); }
+  thead th:last-child { border-right: none; }
   .th-inner { display: flex; align-items: center; gap: 4px; }
   .th-inner.right { justify-content: flex-end; }
   .sort-icon { font-size: 0.6rem; opacity: 0.45; }
   thead th.sorted-asc .sort-icon, thead th.sorted-desc .sort-icon { opacity: 1; }
 
+  /* col tiers */
   .th-50  { color: #aad4ff !important; }
   .th-100 { color: #c4e2ff !important; }
   .th-200 { color: #dceeff !important; }
   .th-500 { color: #ffffff !important; font-weight: 900 !important; }
+  .th-qtd { background: #001144 !important; color: #FFD700 !important; cursor: default !important; }
+  .th-tot { background: #001144 !important; color: #FFD700 !important; cursor: default !important; }
 
   tbody tr { border-bottom: 1px solid var(--border); transition: background 0.08s; }
   tbody tr:last-child { border-bottom: none; }
   tbody tr:nth-child(even) { background: #F8F8F6; }
   tbody tr:hover { background: #EEF5FF; }
   tbody tr.hidden { display: none; }
+  tbody tr.has-qty { background: #FFFBE6 !important; }
+  tbody tr.has-qty:hover { background: #FFF5CC !important; }
 
   td { padding: 8px 10px; border-right: 1px solid var(--border); white-space: nowrap; }
   td:last-child { border-right: none; }
-
   td.ref    { font-size: 0.68rem; font-weight: 700; color: var(--muted); letter-spacing: 0.07em; }
-  td.name   { font-weight: 700; color: var(--text); max-width: 130px; overflow: hidden; text-overflow: ellipsis; }
+  td.name   { font-weight: 700; color: var(--text); }
   td.detail { color: #555; }
-  td.tam span {
-    background: var(--gray); border: 1px solid var(--border);
-    padding: 2px 7px; border-radius: 2px;
-    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em; color: var(--yolo);
-  }
+  td.tam span { background: var(--gray); border: 1px solid var(--border); padding: 2px 7px; border-radius: 2px; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em; color: var(--yolo); }
   td.sellout { text-align: right; font-weight: 700; color: var(--text); }
   td.p-base { text-align: right; color: #444; font-weight: 500; }
   td.p-50   { text-align: right; color: #0066bb; font-weight: 600; }
@@ -126,29 +124,37 @@
   td.p-200  { text-align: right; color: #003d77; font-weight: 700; }
   td.p-500  { text-align: right; color: var(--yolo); font-weight: 900; }
 
-  .disc {
-    display: inline-block; font-size: 0.52rem; font-weight: 700;
-    background: var(--green-bg); color: var(--green);
-    padding: 1px 4px; border-radius: 2px; margin-left: 3px; vertical-align: middle;
+  .disc { display: inline-block; font-size: 0.52rem; font-weight: 700; background: var(--green-bg); color: var(--green); padding: 1px 4px; border-radius: 2px; margin-left: 3px; vertical-align: middle; }
+
+  /* QTD INPUT */
+  td.td-qty { text-align: center; padding: 5px 8px; }
+  .qty-input {
+    width: 62px; text-align: center;
+    border: 1.5px solid var(--border); border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700;
+    padding: 4px 6px; color: var(--yolo);
+    background: var(--white); transition: border-color 0.12s;
+    -moz-appearance: textfield;
   }
+  .qty-input::-webkit-inner-spin-button, .qty-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+  .qty-input:focus { outline: none; border-color: var(--accent); background: #F0F8FF; }
+  .qty-input.filled { border-color: var(--yolo); background: #FFFBE6; }
+
+  /* TOTAL COL */
+  td.td-total { text-align: right; font-weight: 900; color: var(--yolo); font-size: 12.5px; white-space: nowrap; }
+  td.td-total.empty { color: var(--muted); font-weight: 400; font-size: 11px; }
+
+  /* TIER BADGE na col qtd calculada */
+  .tier-badge { display: inline-block; font-size: 0.5rem; font-weight: 700; padding: 1px 5px; border-radius: 2px; margin-left: 4px; vertical-align: middle; background: var(--green-bg); color: var(--green); }
 
   /* INFO BAR */
-  .info-bar {
-    display: flex; margin-top: 14px;
-    border: 1.5px solid var(--black); border-radius: 2px; overflow: hidden; flex-wrap: wrap;
-  }
-  .info-item {
-    flex: 1; min-width: 90px; padding: 11px 14px;
-    border-right: 1px solid var(--border); background: var(--white);
-  }
+  .info-bar { display: flex; margin-top: 14px; border: 1.5px solid var(--black); border-radius: 2px; overflow: hidden; flex-wrap: wrap; }
+  .info-item { flex: 1; min-width: 90px; padding: 11px 14px; border-right: 1px solid var(--border); background: var(--white); }
   .info-item:last-child { border-right: none; }
   .info-item .lbl { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
   .info-item .val { font-size: 0.82rem; font-weight: 900; color: var(--yolo); margin-top: 2px; }
 
-  footer {
-    background: var(--black); color: rgba(255,255,255,0.3); text-align: center;
-    padding: 14px; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
-  }
+  footer { background: var(--black); color: rgba(255,255,255,0.3); text-align: center; padding: 14px; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; }
 </style>
 </head>
 <body>
@@ -156,10 +162,7 @@
 <header>
   <div class="logo-area">
     <div class="logo-icon"><span class="y">Y</span><span class="dot"></span></div>
-    <div class="logo-text">
-      <h1>CALMART</h1>
-      <p>Tabela de Preços · Pet Products</p>
-    </div>
+    <div class="logo-text"><h1>CALMART</h1><p>Tabela de Preços · Pet Products</p></div>
   </div>
   <div class="header-tag">Uso Comercial</div>
 </header>
@@ -170,26 +173,55 @@
   <button class="seg-btn" data-seg="ARRANHADOR MDF" onclick="filterSeg(this,'ARRANHADOR MDF')">Arranhador MDF <span class="count" id="cnt-ARRANHADOR MDF">2</span></button>
   <button class="seg-btn" data-seg="COLETOR DE AREIA" onclick="filterSeg(this,'COLETOR DE AREIA')">Coletor de Areia <span class="count" id="cnt-COLETOR DE AREIA">16</span></button>
   <button class="seg-btn" data-seg="GUIA E PEITORAL" onclick="filterSeg(this,'GUIA E PEITORAL')">Guia e Peitoral <span class="count" id="cnt-GUIA E PEITORAL">15</span></button>
-  <span class="sort-hint">⇅ Clique no cabeçalho para ordenar</span>
+  <span class="sort-hint">⇅ Clique no cabeçalho para ordenar &nbsp;·&nbsp; Digite qtd. para calcular</span>
+</div>
+
+<!-- RESUMO DO PEDIDO -->
+<div class="resumo">
+  <div class="resumo-item">
+    <div class="r-lbl">Itens selecionados</div>
+    <div class="r-val" id="res-itens">0</div>
+    <div class="r-sub">SKUs com quantidade</div>
+  </div>
+  <div class="resumo-item">
+    <div class="r-lbl">Total de peças</div>
+    <div class="r-val" id="res-pecas">0</div>
+    <div class="r-sub">unidades no pedido</div>
+  </div>
+  <div class="resumo-item">
+    <div class="r-lbl">Investimento total</div>
+    <div class="r-val highlight" id="res-total">R$ 0,00</div>
+    <div class="r-sub" id="res-desc">desconto médio: —</div>
+  </div>
+  <div class="resumo-item">
+    <div class="r-lbl">Sell-Out potencial</div>
+    <div class="r-val" id="res-sellout" style="color:#555">R$ 0,00</div>
+    <div class="r-sub">receita estimada ao cliente</div>
+  </div>
+  <button class="resumo-reset" onclick="resetAll()" title="Limpar todas as quantidades">
+    ↺ Limpar
+  </button>
 </div>
 
 <main>
-  <p class="table-meta">Exibindo <span id="visible-count">33</span> produtos &nbsp;·&nbsp; Preço base = Sell-In Final &nbsp;·&nbsp; Descontos por volume aplicados sobre o base</p>
+  <p class="table-meta">Exibindo <span id="visible-count">33</span> produtos &nbsp;·&nbsp; Preço unitário calculado automaticamente conforme volume digitado</p>
   <div class="table-wrap">
     <table id="main-table">
       <thead>
         <tr>
-          <th data-col="ref"     data-type="str" onclick="sortTable(this)"><div class="th-inner">REF <span class="sort-icon">⇅</span></div></th>
-          <th data-col="nome"    data-type="str" onclick="sortTable(this)"><div class="th-inner">Produto <span class="sort-icon">⇅</span></div></th>
-          <th data-col="modelo"  data-type="str" onclick="sortTable(this)"><div class="th-inner">Modelo <span class="sort-icon">⇅</span></div></th>
-          <th data-col="cor"     data-type="str" onclick="sortTable(this)"><div class="th-inner">Cor <span class="sort-icon">⇅</span></div></th>
-          <th data-col="tam"     data-type="tam" onclick="sortTable(this)"><div class="th-inner">Tam. <span class="sort-icon">⇅</span></div></th>
-          <th data-col="sellout" data-type="num" onclick="sortTable(this)"><div class="th-inner right">Sell-Out <span class="sort-icon">⇅</span></div></th>
-          <th data-col="base"    data-type="num" onclick="sortTable(this)"><div class="th-inner right">Base R$ <span class="sort-icon">⇅</span></div></th>
-          <th data-col="p50"     data-type="num" onclick="sortTable(this)" class="th-50"><div class="th-inner right">50 pçs <span class="sort-icon">⇅</span></div></th>
-          <th data-col="p100"    data-type="num" onclick="sortTable(this)" class="th-100"><div class="th-inner right">100 pçs <span class="sort-icon">⇅</span></div></th>
-          <th data-col="p200"    data-type="num" onclick="sortTable(this)" class="th-200"><div class="th-inner right">200 pçs <span class="sort-icon">⇅</span></div></th>
-          <th data-col="p500"    data-type="num" onclick="sortTable(this)" class="th-500"><div class="th-inner right">500 pçs <span class="sort-icon">⇅</span></div></th>
+          <th class="sortable" data-col="ref"     data-type="str" onclick="sortTable(this)"><div class="th-inner">REF <span class="sort-icon">⇅</span></div></th>
+          <th class="sortable" data-col="nome"    data-type="str" onclick="sortTable(this)"><div class="th-inner">Produto <span class="sort-icon">⇅</span></div></th>
+          <th class="sortable" data-col="modelo"  data-type="str" onclick="sortTable(this)"><div class="th-inner">Modelo <span class="sort-icon">⇅</span></div></th>
+          <th class="sortable" data-col="cor"     data-type="str" onclick="sortTable(this)"><div class="th-inner">Cor <span class="sort-icon">⇅</span></div></th>
+          <th class="sortable" data-col="tam"     data-type="tam" onclick="sortTable(this)"><div class="th-inner">Tam. <span class="sort-icon">⇅</span></div></th>
+          <th class="sortable" data-col="sellout" data-type="num" onclick="sortTable(this)"><div class="th-inner right">Sell-Out <span class="sort-icon">⇅</span></div></th>
+          <th class="sortable" data-col="base"    data-type="num" onclick="sortTable(this)"><div class="th-inner right">Base R$ <span class="sort-icon">⇅</span></div></th>
+          <th class="sortable th-50"  data-col="p50"  data-type="num" onclick="sortTable(this)"><div class="th-inner right">50 pçs <span class="sort-icon">⇅</span></div></th>
+          <th class="sortable th-100" data-col="p100" data-type="num" onclick="sortTable(this)"><div class="th-inner right">100 pçs <span class="sort-icon">⇅</span></div></th>
+          <th class="sortable th-200" data-col="p200" data-type="num" onclick="sortTable(this)"><div class="th-inner right">200 pçs <span class="sort-icon">⇅</span></div></th>
+          <th class="sortable th-500" data-col="p500" data-type="num" onclick="sortTable(this)"><div class="th-inner right">500 pçs <span class="sort-icon">⇅</span></div></th>
+          <th class="th-qtd"><div class="th-inner" style="justify-content:center">Qtd.</div></th>
+          <th class="th-tot"><div class="th-inner right">Total (R$)</div></th>
         </tr>
       </thead>
       <tbody id="table-body"></tbody>
@@ -209,6 +241,9 @@
 
 <script>
 const TAM_ORDER = {P:1,M:2,G:3,GG:4,EXG:5,'ÚNICO':6};
+
+// qtd keyed by product index
+const qtdMap = {};
 
 const products = [
   {ref:"A36",nome:"ARRANHADOR MDF",modelo:"Juta Natural",cor:"Juta Natural",dim:"17x60",tam:"ÚNICO",sellout:54.9,base:30.2128},
@@ -249,68 +284,158 @@ const products = [
 let currentSeg = 'ALL';
 let sortCol = null;
 let sortDir = 1;
+// maps rendered row index → original product index
+let rowIndexMap = [];
 
-function fmt(v){ return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function getDiscount(q) {
+  if (q >= 500) return { pct: 0.13, label: '−13%' };
+  if (q >= 200) return { pct: 0.09, label: '−9%' };
+  if (q >= 100) return { pct: 0.06, label: '−6%' };
+  if (q >= 50)  return { pct: 0.03, label: '−3%' };
+  return { pct: 0, label: 'base' };
+}
 
-function buildTable(data){
+function fmtBRL(v) { return 'R$ ' + v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmtNum(v) { return v.toLocaleString('pt-BR'); }
+
+function buildTable(data) {
   const tbody = document.getElementById('table-body');
   tbody.innerHTML = '';
+  rowIndexMap = [];
   let visible = 0;
-  data.forEach(p => {
+  data.forEach(({p, origIdx}) => {
     const show = currentSeg === 'ALL' || p.nome === currentSeg;
-    if(!show) return;
+    if (!show) return;
     visible++;
+    const rowIdx = origIdx;
+    rowIndexMap.push(origIdx);
+    const q = qtdMap[origIdx] || '';
+    const qNum = parseInt(q) || 0;
+    const { pct, label } = getDiscount(qNum);
+    const unitPrice = p.base * (1 - pct);
+    const total = qNum > 0 ? unitPrice * qNum : 0;
+    const hasQty = qNum > 0;
+
     const tr = document.createElement('tr');
-    tr.dataset.seg = p.nome;
+    tr.dataset.origidx = origIdx;
+    if (hasQty) tr.classList.add('has-qty');
+
     tr.innerHTML = `
       <td class="ref">${p.ref}</td>
-      <td class="name">${p.nome.split(' ').map(w=>w[0]+w.slice(1).toLowerCase()).join(' ')}</td>
+      <td class="name">${capNome(p.nome)}</td>
       <td class="detail">${p.modelo}</td>
       <td class="detail">${p.cor}</td>
       <td class="tam"><span>${p.tam}</span></td>
-      <td class="sellout">${fmt(p.sellout)}</td>
-      <td class="p-base">${fmt(p.base)}</td>
-      <td class="p-50">${fmt(p.base*0.97)}<span class="disc">-3%</span></td>
-      <td class="p-100">${fmt(p.base*0.94)}<span class="disc">-6%</span></td>
-      <td class="p-200">${fmt(p.base*0.91)}<span class="disc">-9%</span></td>
-      <td class="p-500">${fmt(p.base*0.87)}<span class="disc">-13%</span></td>
+      <td class="sellout">${fmtBRL(p.sellout)}</td>
+      <td class="p-base">${fmtBRL(p.base)}</td>
+      <td class="p-50">${fmtBRL(p.base*0.97)}<span class="disc">−3%</span></td>
+      <td class="p-100">${fmtBRL(p.base*0.94)}<span class="disc">−6%</span></td>
+      <td class="p-200">${fmtBRL(p.base*0.91)}<span class="disc">−9%</span></td>
+      <td class="p-500">${fmtBRL(p.base*0.87)}<span class="disc">−13%</span></td>
+      <td class="td-qty">
+        <input class="qty-input${hasQty?' filled':''}" type="number" min="0" placeholder="0"
+          value="${q}" data-origidx="${origIdx}" oninput="onQtyChange(this)">
+      </td>
+      <td class="td-total${hasQty?'':' empty'}" id="tot-${origIdx}">
+        ${hasQty ? fmtBRL(total)+'<span class="tier-badge">'+label+'</span>' : '—'}
+      </td>
     `;
     tbody.appendChild(tr);
   });
   document.getElementById('visible-count').textContent = visible;
+  updateResumo();
 }
 
-function filterSeg(btn, seg){
-  document.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));
+function capNome(s) { return s.split(' ').map(w => w[0]+w.slice(1).toLowerCase()).join(' '); }
+
+function onQtyChange(input) {
+  const origIdx = parseInt(input.dataset.origidx);
+  const q = parseInt(input.value) || 0;
+  if (q > 0) { qtdMap[origIdx] = q; input.classList.add('filled'); }
+  else { delete qtdMap[origIdx]; input.classList.remove('filled'); }
+
+  const p = products[origIdx];
+  const { pct, label } = getDiscount(q);
+  const unitPrice = p.base * (1 - pct);
+  const total = q > 0 ? unitPrice * q : 0;
+
+  const totCell = document.getElementById('tot-'+origIdx);
+  if (totCell) {
+    totCell.className = 'td-total' + (q > 0 ? '' : ' empty');
+    totCell.innerHTML = q > 0 ? fmtBRL(total)+'<span class="tier-badge">'+label+'</span>' : '—';
+  }
+  const tr = input.closest('tr');
+  if (tr) { q > 0 ? tr.classList.add('has-qty') : tr.classList.remove('has-qty'); }
+
+  updateResumo();
+}
+
+function updateResumo() {
+  let itens = 0, pecas = 0, investimento = 0, selloutTotal = 0, totalDescontos = 0, totalBase = 0;
+  Object.entries(qtdMap).forEach(([idx, q]) => {
+    const p = products[parseInt(idx)];
+    if (!p || q <= 0) return;
+    const { pct } = getDiscount(q);
+    const unitPrice = p.base * (1 - pct);
+    itens++;
+    pecas += q;
+    investimento += unitPrice * q;
+    selloutTotal += p.sellout * q;
+    totalBase += p.base * q;
+    totalDescontos += pct * p.base * q;
+  });
+  const descMedio = totalBase > 0 ? (totalDescontos / totalBase * 100).toFixed(1) : null;
+
+  document.getElementById('res-itens').textContent = fmtNum(itens);
+  document.getElementById('res-pecas').textContent = fmtNum(pecas);
+  document.getElementById('res-total').textContent = fmtBRL(investimento);
+  document.getElementById('res-sellout').textContent = fmtBRL(selloutTotal);
+  document.getElementById('res-desc').textContent = descMedio ? `desconto médio: ${descMedio}%` : 'desconto médio: —';
+}
+
+function resetAll() {
+  Object.keys(qtdMap).forEach(k => delete qtdMap[k]);
+  document.querySelectorAll('.qty-input').forEach(inp => { inp.value = ''; inp.classList.remove('filled'); });
+  document.querySelectorAll('.td-total').forEach(td => { td.className='td-total empty'; td.innerHTML='—'; });
+  document.querySelectorAll('tbody tr').forEach(tr => tr.classList.remove('has-qty'));
+  updateResumo();
+}
+
+function filterSeg(btn, seg) {
+  document.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   currentSeg = seg;
   renderSorted();
 }
 
-function sortTable(th){
+function sortTable(th) {
   const col = th.dataset.col;
-  const type = th.dataset.type;
-  if(sortCol === col){ sortDir *= -1; }
+  if (sortCol === col) { sortDir *= -1; }
   else { sortCol = col; sortDir = 1; }
-  document.querySelectorAll('thead th').forEach(t=>{ t.classList.remove('sorted-asc','sorted-desc'); t.querySelector('.sort-icon').textContent='⇅'; });
-  th.classList.add(sortDir===1 ? 'sorted-asc' : 'sorted-desc');
-  th.querySelector('.sort-icon').textContent = sortDir===1 ? '↑' : '↓';
+  document.querySelectorAll('thead th').forEach(t => {
+    t.classList.remove('sorted-asc','sorted-desc');
+    const si = t.querySelector('.sort-icon');
+    if (si) si.textContent = '⇅';
+  });
+  th.classList.add(sortDir === 1 ? 'sorted-asc' : 'sorted-desc');
+  th.querySelector('.sort-icon').textContent = sortDir === 1 ? '↑' : '↓';
   renderSorted();
 }
 
-function renderSorted(){
-  let data = [...products];
-  if(sortCol){
-    data.sort((a,b)=>{
+function renderSorted() {
+  let data = products.map((p, i) => ({p, origIdx: i}));
+  if (sortCol) {
+    data.sort((a, b) => {
       let va, vb;
-      if(sortCol==='p50'){va=a.base*0.97;vb=b.base*0.97;}
-      else if(sortCol==='p100'){va=a.base*0.94;vb=b.base*0.94;}
-      else if(sortCol==='p200'){va=a.base*0.91;vb=b.base*0.91;}
-      else if(sortCol==='p500'){va=a.base*0.87;vb=b.base*0.87;}
-      else if(sortCol==='tam'){va=TAM_ORDER[a.tam]||99;vb=TAM_ORDER[b.tam]||99;}
-      else {va=a[sortCol];vb=b[sortCol];}
-      if(typeof va==='string') return va.localeCompare(vb,'pt-BR')*sortDir;
-      return (va-vb)*sortDir;
+      const pa = a.p, pb = b.p;
+      if (sortCol==='p50')  { va=pa.base*0.97; vb=pb.base*0.97; }
+      else if (sortCol==='p100') { va=pa.base*0.94; vb=pb.base*0.94; }
+      else if (sortCol==='p200') { va=pa.base*0.91; vb=pb.base*0.91; }
+      else if (sortCol==='p500') { va=pa.base*0.87; vb=pb.base*0.87; }
+      else if (sortCol==='tam')  { va=TAM_ORDER[pa.tam]||99; vb=TAM_ORDER[pb.tam]||99; }
+      else { va=pa[sortCol]; vb=pb[sortCol]; }
+      if (typeof va === 'string') return va.localeCompare(vb,'pt-BR') * sortDir;
+      return (va - vb) * sortDir;
     });
   }
   buildTable(data);
