@@ -77,16 +77,18 @@ main{padding:10px 24px 60px;}
 .table-meta{font-size:.6rem;color:var(--muted);padding:6px 0 5px;letter-spacing:.04em;}
 
 /* TABLE */
-.table-wrap{border:1.5px solid var(--black);border-radius:2px;overflow:auto;}
+.table-wrap{border:1.5px solid var(--black);border-radius:2px;overflow:visible;}
 table{width:100%;border-collapse:collapse;font-size:12px;}
 thead tr{background:var(--yolo);}
-thead th{padding:9px 10px;text-align:left;font-size:.52rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);white-space:nowrap;border-right:1px solid rgba(255,255,255,.08);user-select:none;transition:background .1s;}
+thead th{padding:9px 10px;text-align:left;font-size:.52rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);white-space:nowrap;border-right:1px solid rgba(255,255,255,.08);user-select:none;transition:background .1s;position:sticky;top:68px;z-index:10;}
 thead th.sortable{cursor:pointer;}
 thead th.sortable:hover{background:rgba(0,153,255,.28);color:#fff;}
 thead th.sorted-asc,thead th.sorted-desc{background:var(--accent);color:#fff;}
 thead th:last-child{border-right:none;}
+thead th.th-center,thead th[data-col="tam"],thead th.th-qtd{text-align:center;}
 .th-inner{display:flex;align-items:center;gap:4px;}
 .th-inner.right{justify-content:flex-end;}
+.th-inner.center{justify-content:center;}
 .sort-icon{font-size:.56rem;opacity:.4;}
 thead th.sorted-asc .sort-icon,thead th.sorted-desc .sort-icon{opacity:1;}
 td.price-col.tier-active.th-50{font-weight:900!important;}
@@ -103,6 +105,7 @@ td:last-child{border-right:none;}
 td.ref{font-size:.68rem;font-weight:700;color:var(--muted);letter-spacing:.07em;}
 td.cat-col{font-size:.65rem;color:var(--muted);white-space:nowrap;max-width:120px;}
 td.detail{color:#555;}
+td.tam{text-align:center;}
 td.tam span{background:var(--gray);border:1px solid var(--border);padding:2px 7px;border-radius:2px;font-size:.64rem;font-weight:700;letter-spacing:.06em;color:var(--yolo);}
 td.sellout{text-align:right;font-weight:700;}
 .disc{display:inline-block;font-size:.5rem;font-weight:700;background:var(--green-bg);color:var(--green);padding:1px 4px;border-radius:2px;margin-left:3px;vertical-align:middle;}
@@ -284,13 +287,13 @@ footer a{color:var(--accent);text-decoration:none;}
           <th class="sortable" data-col="cat"     onclick="sortBy(this)"><div class="th-inner">Categoria <span class="sort-icon">&#x21c5;</span></div></th>
           <th class="sortable" data-col="estilo"  onclick="sortBy(this)"><div class="th-inner">Estilo <span class="sort-icon">&#x21c5;</span></div></th>
           <th class="sortable" data-col="cor"     onclick="sortBy(this)"><div class="th-inner">Cor <span class="sort-icon">&#x21c5;</span></div></th>
-          <th class="sortable" data-col="tam"     onclick="sortBy(this)"><div class="th-inner">Tam. <span class="sort-icon">&#x21c5;</span></div></th>
+          <th class="sortable" data-col="tam"     onclick="sortBy(this)"><div class="th-inner center">Tam. <span class="sort-icon">&#x21c5;</span></div></th>
           <th class="sortable" data-col="sellout" onclick="sortBy(this)"><div class="th-inner right">Sell-out <span class="sort-icon">&#x21c5;</span></div></th>
           <th class="sortable" data-col="base"    onclick="sortBy(this)"><div class="th-inner right">Base (R$) <span class="sort-icon">&#x21c5;</span></div></th>
           <th class="sortable th-10" data-col="p10" onclick="sortBy(this)"><div class="th-inner right">10 Pçs <span class="sort-icon">&#x21c5;</span></div></th>
           <th class="sortable th-30" data-col="p30" onclick="sortBy(this)"><div class="th-inner right">30 Pçs <span class="sort-icon">&#x21c5;</span></div></th>
           <th class="sortable th-50" data-col="p50" onclick="sortBy(this)"><div class="th-inner right">50 Pçs <span class="sort-icon">&#x21c5;</span></div></th>
-          <th class="th-qtd"><div class="th-inner right">Qtd</div></th>
+          <th class="th-qtd"><div class="th-inner center">Qtd</div></th>
           <th class="th-tot"><div class="th-inner right">Total</div></th>
         </tr>
       </thead>
