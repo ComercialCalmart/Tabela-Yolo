@@ -347,7 +347,7 @@ function buildTable(data){
     if(q>0){tr.classList.add("has-qty");}
     else{tr.classList.add("no-qty");}
 
-    var totHtml = q>0 ? fmtBRL(total)+"<span class=\"tier-badge\">"+disc.label+"</span>" : "&mdash;";
+    var totHtml = q>0 ? fmtBRL(total) : "&mdash;";
     var totCls  = q>0 ? "td-total" : "td-total empty";
 
     tr.innerHTML =
@@ -381,7 +381,7 @@ function onQtyChange(input){
   var totCell = document.getElementById("tot-"+origIdx);
   if(totCell){
     totCell.className = q>0 ? "td-total" : "td-total empty";
-    totCell.innerHTML = q>0 ? fmtBRL(total)+"<span class=\"tier-badge\">"+disc.label+"</span>" : "&mdash;";
+    totCell.innerHTML = q>0 ? fmtBRL(total) : "&mdash;";
   }
   var tr = input.closest("tr");
   if(tr){
