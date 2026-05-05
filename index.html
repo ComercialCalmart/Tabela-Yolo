@@ -293,8 +293,8 @@ function fmtBRL(v){
 function fmtNum(v){return v.toLocaleString("pt-BR");}
 
 function getDiscount(q){
-  if(q>=50) return {pct:0.20,label:"-20%"};
-  if(q>=30) return {pct:0.15,label:"-15%"};
+  if(q>=50) return {pct:1-0.90*0.95*0.95,label:"-10% -5% -5%"};
+  if(q>=30) return {pct:1-0.90*0.95,label:"-10% -5%"};
   if(q>=10) return {pct:0.10,label:"-10%"};
   return {pct:0,label:""};
 }
@@ -309,8 +309,8 @@ function buildTable(data){
     var disc = getDiscount(q);
     var total = q > 0 ? p.base*(1-disc.pct)*q : 0;
     var p10 = p.base*0.90;
-    var p30 = p.base*0.85;
-    var p50 = p.base*0.80;
+    var p30 = p10*0.95;
+    var p50 = p30*0.95;
     var active = "base";
     if(q>=50) active="50";
     else if(q>=30) active="30";
@@ -336,8 +336,8 @@ function buildTable(data){
       "<td class=\"sellout\">"+fmtBRL(p.sellout)+"</td>"+
       "<td class=\"price-col"+tierCls("base")+"\" data-rowidx=\""+origIdx+"\" data-tier=\"base\">"+fmtBRL(p.base)+"</td>"+
       "<td class=\"price-col th-10"+tierCls("10")+"\" data-rowidx=\""+origIdx+"\" data-tier=\"10\">"+fmtBRL(p10)+"<span class=\"disc\">-10%</span></td>"+
-      "<td class=\"price-col th-30"+tierCls("30")+"\" data-rowidx=\""+origIdx+"\" data-tier=\"30\">"+fmtBRL(p30)+"<span class=\"disc\">-15%</span></td>"+
-      "<td class=\"price-col th-50"+tierCls("50")+"\" data-rowidx=\""+origIdx+"\" data-tier=\"50\">"+fmtBRL(p50)+"<span class=\"disc\">-20%</span></td>"+
+      "<td class=\"price-col th-30"+tierCls("30")+"\" data-rowidx=\""+origIdx+"\" data-tier=\"30\">"+fmtBRL(p30)+"<span class=\"disc\">-14,5%</span></td>"+
+      "<td class=\"price-col th-50"+tierCls("50")+"\" data-rowidx=\""+origIdx+"\" data-tier=\"50\">"+fmtBRL(p50)+"<span class=\"disc\">-18,78%</span></td>"+
       "<td class=\"td-qty no-print\"><input class=\"qty-input"+(q>0?" filled":"")+"\" type=\"number\" min=\"0\" value=\""+(q>0?q:"")+"\" placeholder=\"0\" data-origidx=\""+origIdx+"\" oninput=\"onQtyChange(this)\"></td>"+
       "<td class=\"qty-print\">"+( q>0 ? q : "" )+"</td>"+
       "<td class=\""+totCls+"\" id=\"tot-"+origIdx+"\">"+totHtml+"</td>";
@@ -448,8 +448,8 @@ function renderSorted(){
     data.sort(function(a,b){
       var va,vb,pa=a.p,pb=b.p;
       if(sortCol==="p10"){va=pa.base*0.90;vb=pb.base*0.90;}
-      else if(sortCol==="p30"){va=pa.base*0.85;vb=pb.base*0.85;}
-      else if(sortCol==="p50"){va=pa.base*0.80;vb=pb.base*0.80;}
+      else if(sortCol==="p30"){va=pa.base*0.90*0.95;vb=pb.base*0.90*0.95;}
+      else if(sortCol==="p50"){va=pa.base*0.90*0.95*0.95;vb=pb.base*0.90*0.95*0.95;}
       else if(sortCol==="tam"){va=TAM_ORDER[pa.tam]||99;vb=TAM_ORDER[pb.tam]||99;}
       else{va=pa[sortCol];vb=pb[sortCol];}
       if(typeof va==="string") return va.localeCompare(vb,"pt-BR")*sortDir;
