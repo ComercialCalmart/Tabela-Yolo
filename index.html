@@ -30,33 +30,61 @@ header{background:var(--yolo);border-bottom:3px solid var(--accent);height:68px;
 .btn-pdf:hover{background:#007fdd;transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,153,255,.55);}
 .btn-pdf:active{transform:translateY(0);box-shadow:none;}
 
-/* TOOLBAR */
-.toolbar{background:var(--white);border-bottom:2px solid var(--black);padding:9px 24px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.filter-label{font-size:.56rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
-.filter-divider{width:1px;height:22px;background:var(--border);margin:0 4px;}
-.seg-btn{background:var(--white);border:1.5px solid var(--border);color:var(--muted);font-family:"DM Sans",sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:2px;cursor:pointer;transition:all .12s;display:flex;align-items:center;gap:5px;}
+/* ── BOTÃO LIMPAR no header ─────────────────────────────── */
+.btn-limpar{background:transparent;border:1.5px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);cursor:pointer;font-family:"DM Sans",sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:0 16px;height:40px;border-radius:3px;display:flex;align-items:center;gap:6px;transition:all .14s;white-space:nowrap;}
+.btn-limpar:hover{border-color:rgba(255,255,255,.7);color:#fff;}
+
+/* ── PAINEL SUPERIOR ────────────────────────────────────── */
+.top-panel{display:flex;align-items:stretch;border-bottom:2px solid var(--black);background:var(--white);}
+
+/* FILTROS — 62% */
+.toolbar{flex:0 0 62%;padding:10px 18px 10px 24px;display:flex;flex-direction:column;gap:6px;border-right:2px solid var(--black);}
+.filter-row{display:flex;align-items:center;gap:6px;}
+.filter-label{font-size:.5rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);white-space:nowrap;flex-shrink:0;min-width:66px;}
+.filter-btns{display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+.filter-divider{display:none;}
+.seg-btn{background:var(--white);border:1.5px solid var(--border);color:var(--muted);font-family:"DM Sans",sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:2px;cursor:pointer;transition:all .12s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
 .seg-btn:hover{border-color:var(--accent);color:var(--accent);}
 .seg-btn.active{background:var(--yolo);border-color:var(--yolo);color:var(--white);}
-.seg-btn.disabled,.seg-btn:disabled{opacity:.28;cursor:not-allowed;pointer-events:none;border-color:var(--border);color:var(--muted);}
-.count-badge{font-size:.54rem;padding:1px 5px;border-radius:10px;background:var(--gray);color:var(--muted);}
+.seg-btn.disabled,.seg-btn:disabled{opacity:.28;cursor:not-allowed;pointer-events:none;}
+.count-badge{font-size:.48rem;padding:1px 4px;border-radius:10px;background:var(--gray);color:var(--muted);}
 .seg-btn.active .count-badge{background:rgba(255,255,255,.2);color:rgba(255,255,255,.8);}
-.sort-hint{margin-left:auto;font-size:.58rem;color:var(--muted);}
+.sort-hint{font-size:.5rem;color:var(--muted);}
 
-/* RESUMO */
-.resumo-bar{margin:12px 24px 0;border:2px solid var(--yolo);border-radius:2px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr 3px 1fr auto;overflow:hidden;}
-.r-item{padding:11px 16px;border-right:1px solid var(--border);background:var(--white);}
-.r-item:last-of-type{border-right:none;}
-.r-lbl{font-size:.52rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
-.r-val{font-size:1.18rem;font-weight:900;color:var(--yolo);line-height:1;margin-top:2px;}
-.r-val.green{color:var(--green);}
-.r-item.pix-item{background:var(--pix-bg);border-left:3px solid var(--pix);}
-.r-val.pix{color:var(--pix);}
-.r-lbl.pix{color:var(--pix);}
-.r-divider{background:var(--yolo);opacity:.18;}
-.r-item.sellout-item{background:var(--green-bg);}
-.r-sub{font-size:.58rem;color:var(--muted);margin-top:2px;}
-.r-reset{background:var(--gray);border:none;cursor:pointer;padding:0 16px;font-family:"DM Sans",sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:all .12s;display:flex;align-items:center;gap:5px;}
-.r-reset:hover{background:#e0e0dc;color:var(--black);}
+/* RESUMO — 38% */
+.resumo-bar{flex:0 0 38%;display:flex;flex-direction:column;justify-content:center;gap:0;}
+
+/* Cada linha do resumo: 3 blocos */
+.r-row{display:flex;flex:1;border-bottom:1px solid var(--border);}
+.r-row:last-child{border-bottom:none;}
+
+/* Bloco genérico */
+.r-block{flex:1;padding:8px 12px;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;}
+.r-block:last-child{border-right:none;}
+
+/* Linha 1 — neutro */
+.r-block.neutral{background:var(--white);}
+
+/* Linha 2 — PIX (teal) */
+.r-block.pix{background:var(--pix-bg);}
+
+/* Linha 2 — Sell-out (verde) */
+.r-block.sellout{background:var(--green-bg);}
+
+/* Tipografia uniforme */
+.r-lbl{font-size:.46rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);line-height:1;}
+.r-block.pix   .r-lbl{color:var(--pix);}
+.r-block.sellout .r-lbl{color:var(--green);}
+.r-val{font-size:.96rem;font-weight:900;color:var(--yolo);line-height:1.15;margin-top:3px;}
+.r-block.pix   .r-val{color:var(--pix);}
+.r-block.sellout .r-val{color:var(--green);}
+.r-sub{font-size:.48rem;color:var(--muted);margin-top:2px;line-height:1;}
+.r-block.pix   .r-sub{color:var(--pix);opacity:.75;}
+.r-block.sellout .r-sub{color:var(--green);opacity:.75;}
+
+/* legados que o JS ainda usa — manter IDs, esconder elementos antigos */
+.r-reset{display:none;}
+.r-divider{display:none;}
 
 /* MAIN */
 main{padding:10px 24px 60px;}
@@ -130,14 +158,13 @@ footer a{color:var(--accent);text-decoration:none;}
 
 @media(max-width:768px){
   header{padding-right:12px;}
-  main,.toolbar,.resumo-bar{padding-left:12px;padding-right:12px;}
-  .resumo-bar{grid-template-columns:1fr 1fr;}
-  .r-divider{display:none;}
-  .r-reset{grid-column:1/-1;padding:12px;justify-content:center;}
+  main,.top-panel{padding-left:12px;padding-right:12px;}
+  .top-panel{flex-direction:column;}
+  .toolbar{flex:none;border-right:none;border-bottom:2px solid var(--black);}
+  .resumo-bar{flex:none;padding:10px 12px;}
 }
 @media(max-width:1100px){
-  .resumo-bar{grid-template-columns:1fr 1fr 1fr;}
-  .r-divider{display:none;}
+  .r-metrics{flex-wrap:wrap;}
 }
 
 /* =========================================================
@@ -149,7 +176,7 @@ footer a{color:var(--accent);text-decoration:none;}
   html,body{width:100%!important;height:auto!important;overflow:visible!important;}
   body{font-size:9px!important;background:white;}
 
-  .no-print,.toolbar,.sort-icon,.btn-pdf,.r-reset,.table-meta{display:none!important;}
+  .no-print,.top-panel,.sort-icon,.btn-pdf,.r-reset,.table-meta{display:none!important;}
   tbody tr.no-qty{display:none!important;}
 
   .qty-print{display:table-cell!important;}
@@ -162,8 +189,6 @@ footer a{color:var(--accent);text-decoration:none;}
   .logo-icon-box img{width:28px!important;height:28px!important;}
   .logo-text img{height:14px!important;}
   .logo-text .subtitle{font-size:.44rem!important;}
-  .resumo-bar{margin:6px 0 0!important;font-size:8px!important;}
-  .r-val{font-size:.9rem!important;}
   main{padding:6px 0 10px!important;}
   .client-row{padding:6px 0 7px!important;}
   .table-wrap{border:1px solid #000!important;overflow:visible!important;}
@@ -190,76 +215,97 @@ footer a{color:var(--accent);text-decoration:none;}
   </div>
   <div class="header-right">
     <button class="btn-pdf no-print" onclick="gerarPDF()">&#x2B07; Baixar PDF</button>
+    <button class="btn-limpar no-print" onclick="resetAll()">↺ Limpar</button>
   </div>
 </header>
 
-<div class="toolbar no-print">
-  <span class="filter-label">Filtrar</span>
-  <div class="filter-divider"></div>
-  <span class="filter-label">Categoria:</span>
-  <button class="seg-btn active" data-filter="cat" data-val="todos"             onclick="filtrar(this,'cat','todos')">Todas <span class="count-badge">54</span></button>
-  <button class="seg-btn" data-filter="cat" data-val="Coletor de Areia"         onclick="filtrar(this,'cat','Coletor de Areia')">Coletor de Areia <span class="count-badge">19</span></button>
-  <button class="seg-btn" data-filter="cat" data-val="Cama / Colchonete"        onclick="filtrar(this,'cat','Cama / Colchonete')">Cama / Colchonete <span class="count-badge">8</span></button>
-  <button class="seg-btn" data-filter="cat" data-val="Arranhador"               onclick="filtrar(this,'cat','Arranhador')">Arranhador <span class="count-badge">5</span></button>
-  <button class="seg-btn" data-filter="cat" data-val="Guia e Peitoral"          onclick="filtrar(this,'cat','Guia e Peitoral')">Guia e Peitoral <span class="count-badge">15</span></button>
-  <button class="seg-btn" data-filter="cat" data-val="Colar Elizabetano"        onclick="filtrar(this,'cat','Colar Elizabetano')">Colar Elizabetano <span class="count-badge">5</span></button>
-  <div class="filter-divider"></div>
-  <span class="filter-label">Tamanho:</span>
-  <button class="seg-btn active" data-filter="tam" data-val="todos" onclick="filtrar(this,'tam','todos')">Todos</button>
-  <button class="seg-btn" data-filter="tam" data-val="PP"   onclick="filtrar(this,'tam','PP')">PP</button>
-  <button class="seg-btn" data-filter="tam" data-val="P"    onclick="filtrar(this,'tam','P')">P</button>
-  <button class="seg-btn" data-filter="tam" data-val="M"    onclick="filtrar(this,'tam','M')">M</button>
-  <button class="seg-btn" data-filter="tam" data-val="G"    onclick="filtrar(this,'tam','G')">G</button>
-  <button class="seg-btn" data-filter="tam" data-val="GG"   onclick="filtrar(this,'tam','GG')">GG</button>
-  <button class="seg-btn" data-filter="tam" data-val="EXG"  onclick="filtrar(this,'tam','EXG')">EXG</button>
-  <button class="seg-btn" data-filter="tam" data-val="ÚNICO" onclick="filtrar(this,'tam','ÚNICO')">Único</button>
-  <div class="filter-divider"></div>
-  <span class="filter-label">Estilo:</span>
-  <button class="seg-btn active" data-filter="est" data-val="todos"       onclick="filtrar(this,'est','todos')">Todos</button>
-  <button class="seg-btn" data-filter="est" data-val="Redondo"            onclick="filtrar(this,'est','Redondo')">Redondo</button>
-  <button class="seg-btn" data-filter="est" data-val="Coração"            onclick="filtrar(this,'est','Coração')">Coração</button>
-  <button class="seg-btn" data-filter="est" data-val="Estampado"          onclick="filtrar(this,'est','Estampado')">Estampado</button>
-  <button class="seg-btn" data-filter="est" data-val="Cama Camping"       onclick="filtrar(this,'est','Cama Camping')">Cama Camping</button>
-  <button class="seg-btn" data-filter="est" data-val="Kit"                onclick="filtrar(this,'est','Kit')">Kit Guia</button>
-  <button class="seg-btn" data-filter="est" data-val="MDF"                onclick="filtrar(this,'est','MDF')">MDF</button>
-  <button class="seg-btn" data-filter="est" data-val="ArranhaFix"         onclick="filtrar(this,'est','ArranhaFix')">ArranhaFix</button>
-  <button class="seg-btn" data-filter="est" data-val="Fibra Siliconada"   onclick="filtrar(this,'est','Fibra Siliconada')">Fibra Siliconada</button>
-  <span class="sort-hint">Clique no cabeçalho para ordenar</span>
-</div>
+<div class="top-panel no-print">
 
-<div class="resumo-bar">
-  <div class="r-item">
-    <div class="r-lbl">Itens Selecionados</div>
-    <div class="r-val" id="res-itens">0</div>
-    <div class="r-sub">SKUs com quantidade</div>
+  <!-- FILTROS (60%) -->
+  <div class="toolbar">
+    <div class="filter-row">
+      <span class="filter-label">Categoria</span>
+      <div class="filter-btns">
+        <button class="seg-btn active" data-filter="cat" data-val="todos"           onclick="filtrar(this,'cat','todos')">Todas <span class="count-badge">54</span></button>
+        <button class="seg-btn" data-filter="cat" data-val="Coletor de Areia"       onclick="filtrar(this,'cat','Coletor de Areia')">Coletor de Areia <span class="count-badge">19</span></button>
+        <button class="seg-btn" data-filter="cat" data-val="Cama / Colchonete"      onclick="filtrar(this,'cat','Cama / Colchonete')">Cama / Colchonete <span class="count-badge">8</span></button>
+        <button class="seg-btn" data-filter="cat" data-val="Arranhador"             onclick="filtrar(this,'cat','Arranhador')">Arranhador <span class="count-badge">5</span></button>
+        <button class="seg-btn" data-filter="cat" data-val="Guia e Peitoral"        onclick="filtrar(this,'cat','Guia e Peitoral')">Guia e Peitoral <span class="count-badge">15</span></button>
+        <button class="seg-btn" data-filter="cat" data-val="Colar Elizabetano"      onclick="filtrar(this,'cat','Colar Elizabetano')">Colar Elizabetano <span class="count-badge">5</span></button>
+      </div>
+    </div>
+    <div class="filter-row">
+      <span class="filter-label">Tamanho</span>
+      <div class="filter-btns">
+        <button class="seg-btn active" data-filter="tam" data-val="todos" onclick="filtrar(this,'tam','todos')">Todos</button>
+        <button class="seg-btn" data-filter="tam" data-val="PP"    onclick="filtrar(this,'tam','PP')">PP</button>
+        <button class="seg-btn" data-filter="tam" data-val="P"     onclick="filtrar(this,'tam','P')">P</button>
+        <button class="seg-btn" data-filter="tam" data-val="M"     onclick="filtrar(this,'tam','M')">M</button>
+        <button class="seg-btn" data-filter="tam" data-val="G"     onclick="filtrar(this,'tam','G')">G</button>
+        <button class="seg-btn" data-filter="tam" data-val="GG"    onclick="filtrar(this,'tam','GG')">GG</button>
+        <button class="seg-btn" data-filter="tam" data-val="EXG"   onclick="filtrar(this,'tam','EXG')">EXG</button>
+        <button class="seg-btn" data-filter="tam" data-val="ÚNICO" onclick="filtrar(this,'tam','ÚNICO')">Único</button>
+      </div>
+    </div>
+    <div class="filter-row">
+      <span class="filter-label">Estilo</span>
+      <div class="filter-btns">
+        <button class="seg-btn active" data-filter="est" data-val="todos"     onclick="filtrar(this,'est','todos')">Todos</button>
+        <button class="seg-btn" data-filter="est" data-val="Redondo"          onclick="filtrar(this,'est','Redondo')">Redondo</button>
+        <button class="seg-btn" data-filter="est" data-val="Coração"          onclick="filtrar(this,'est','Coração')">Coração</button>
+        <button class="seg-btn" data-filter="est" data-val="Estampado"        onclick="filtrar(this,'est','Estampado')">Estampado</button>
+        <button class="seg-btn" data-filter="est" data-val="Cama Camping"     onclick="filtrar(this,'est','Cama Camping')">Cama Camping</button>
+        <button class="seg-btn" data-filter="est" data-val="Kit"              onclick="filtrar(this,'est','Kit')">Kit Guia</button>
+        <button class="seg-btn" data-filter="est" data-val="MDF"              onclick="filtrar(this,'est','MDF')">MDF</button>
+        <button class="seg-btn" data-filter="est" data-val="ArranhaFix"       onclick="filtrar(this,'est','ArranhaFix')">ArranhaFix</button>
+        <button class="seg-btn" data-filter="est" data-val="Fibra Siliconada" onclick="filtrar(this,'est','Fibra Siliconada')">Fibra Siliconada</button>
+      </div>
+    </div>
+    <div class="sort-hint">↑↓ Clique no cabeçalho da tabela para ordenar</div>
   </div>
-  <div class="r-item">
-    <div class="r-lbl">Total de Peças</div>
-    <div class="r-val" id="res-pecas">0</div>
-    <div class="r-sub">unidades no pedido</div>
+
+  <!-- RESUMO (38%) -->
+  <div class="resumo-bar">
+
+    <!-- Linha 1: Itens · Peças · Investimento -->
+    <div class="r-row">
+      <div class="r-block neutral">
+        <div class="r-lbl">Itens</div>
+        <div class="r-val" id="res-itens">0</div>
+        <div class="r-sub">SKUs selecionados</div>
+      </div>
+      <div class="r-block neutral">
+        <div class="r-lbl">Peças</div>
+        <div class="r-val" id="res-pecas">0</div>
+        <div class="r-sub">unidades no pedido</div>
+      </div>
+      <div class="r-block neutral">
+        <div class="r-lbl">Investimento</div>
+        <div class="r-val" id="res-total">R$&nbsp;0,00</div>
+        <div class="r-sub" id="res-desc">desconto médio: &mdash;</div>
+      </div>
+    </div>
+
+    <!-- Linha 2: Desconto PIX · Total PIX · Sell-out -->
+    <div class="r-row">
+      <div class="r-block pix">
+        <div class="r-lbl">Desconto PIX (3%)</div>
+        <div class="r-val" id="res-pix-desc">R$&nbsp;0,00</div>
+        <div class="r-sub">sobre o investimento</div>
+      </div>
+      <div class="r-block pix">
+        <div class="r-lbl">Total com PIX</div>
+        <div class="r-val" id="res-pix-total">R$&nbsp;0,00</div>
+        <div class="r-sub">valor final à vista</div>
+      </div>
+      <div class="r-block sellout">
+        <div class="r-lbl">Sell-out Potencial</div>
+        <div class="r-val" id="res-sellout">R$&nbsp;0,00</div>
+        <div class="r-sub">receita estimada ao cliente</div>
+      </div>
+    </div>
+
   </div>
-  <div class="r-item">
-    <div class="r-lbl">Investimento Total</div>
-    <div class="r-val" id="res-total">R$&nbsp;0,00</div>
-    <div class="r-sub" id="res-desc">desconto médio: &mdash;</div>
-  </div>
-  <div class="r-item pix-item">
-    <div class="r-lbl pix">Desconto PIX <span style="font-weight:400;font-size:.5rem;letter-spacing:.06em;">(3%)</span></div>
-    <div class="r-val pix" id="res-pix-desc">R$&nbsp;0,00</div>
-    <div class="r-sub">sobre o investimento total</div>
-  </div>
-  <div class="r-item pix-item">
-    <div class="r-lbl pix">Total com PIX</div>
-    <div class="r-val pix" id="res-pix-total">R$&nbsp;0,00</div>
-    <div class="r-sub">valor final à vista</div>
-  </div>
-  <div class="r-divider"></div>
-  <div class="r-item sellout-item">
-    <div class="r-lbl">Sell-out Potencial</div>
-    <div class="r-val green" id="res-sellout">R$&nbsp;0,00</div>
-    <div class="r-sub">receita estimada ao cliente</div>
-  </div>
-  <button class="r-reset no-print" onclick="resetAll()">↺ Limpar</button>
 </div>
 
 <main>
