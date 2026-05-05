@@ -37,6 +37,7 @@ header{background:var(--yolo);border-bottom:3px solid var(--accent);height:68px;
 .seg-btn{background:var(--white);border:1.5px solid var(--border);color:var(--muted);font-family:"DM Sans",sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:2px;cursor:pointer;transition:all .12s;display:flex;align-items:center;gap:5px;}
 .seg-btn:hover{border-color:var(--accent);color:var(--accent);}
 .seg-btn.active{background:var(--yolo);border-color:var(--yolo);color:var(--white);}
+.seg-btn.disabled,.seg-btn:disabled{opacity:.28;cursor:not-allowed;pointer-events:none;border-color:var(--border);color:var(--muted);}
 .count-badge{font-size:.54rem;padding:1px 5px;border-radius:10px;background:var(--gray);color:var(--muted);}
 .seg-btn.active .count-badge{background:rgba(255,255,255,.2);color:rgba(255,255,255,.8);}
 .sort-hint{margin-left:auto;font-size:.58rem;color:var(--muted);}
@@ -100,6 +101,7 @@ tbody tr.has-qty:hover{background:var(--row-sel-h)!important;}
 td{padding:8px 10px;border-right:1px solid var(--border);white-space:nowrap;}
 td:last-child{border-right:none;}
 td.ref{font-size:.68rem;font-weight:700;color:var(--muted);letter-spacing:.07em;}
+td.cat-col{font-size:.65rem;color:var(--muted);white-space:nowrap;max-width:120px;}
 td.detail{color:#555;}
 td.tam span{background:var(--gray);border:1px solid var(--border);padding:2px 7px;border-radius:2px;font-size:.64rem;font-weight:700;letter-spacing:.06em;color:var(--yolo);}
 td.sellout{text-align:right;font-weight:700;}
@@ -191,17 +193,34 @@ footer a{color:var(--accent);text-decoration:none;}
 <div class="toolbar no-print">
   <span class="filter-label">Filtrar</span>
   <div class="filter-divider"></div>
+  <span class="filter-label">Categoria:</span>
+  <button class="seg-btn active" data-filter="cat" data-val="todos"             onclick="filtrar(this,'cat','todos')">Todas <span class="count-badge">54</span></button>
+  <button class="seg-btn" data-filter="cat" data-val="Coletor de Areia"         onclick="filtrar(this,'cat','Coletor de Areia')">Coletor de Areia <span class="count-badge">19</span></button>
+  <button class="seg-btn" data-filter="cat" data-val="Cama / Colchonete"        onclick="filtrar(this,'cat','Cama / Colchonete')">Cama / Colchonete <span class="count-badge">8</span></button>
+  <button class="seg-btn" data-filter="cat" data-val="Arranhador"               onclick="filtrar(this,'cat','Arranhador')">Arranhador <span class="count-badge">5</span></button>
+  <button class="seg-btn" data-filter="cat" data-val="Guia e Peitoral"          onclick="filtrar(this,'cat','Guia e Peitoral')">Guia e Peitoral <span class="count-badge">15</span></button>
+  <button class="seg-btn" data-filter="cat" data-val="Colar Elizabetano"        onclick="filtrar(this,'cat','Colar Elizabetano')">Colar Elizabetano <span class="count-badge">5</span></button>
+  <div class="filter-divider"></div>
   <span class="filter-label">Tamanho:</span>
-  <button class="seg-btn active" data-filter="tam" data-val="todos" onclick="filtrar(this,'tam','todos')">Todos <span class="count-badge">16</span></button>
-  <button class="seg-btn" data-filter="tam" data-val="EXG" onclick="filtrar(this,'tam','EXG')">EXG <span class="count-badge">4</span></button>
-  <button class="seg-btn" data-filter="tam" data-val="GG"  onclick="filtrar(this,'tam','GG')">GG <span class="count-badge">4</span></button>
-  <button class="seg-btn" data-filter="tam" data-val="G"   onclick="filtrar(this,'tam','G')">G <span class="count-badge">4</span></button>
-  <button class="seg-btn" data-filter="tam" data-val="M"   onclick="filtrar(this,'tam','M')">M <span class="count-badge">4</span></button>
+  <button class="seg-btn active" data-filter="tam" data-val="todos" onclick="filtrar(this,'tam','todos')">Todos</button>
+  <button class="seg-btn" data-filter="tam" data-val="PP"   onclick="filtrar(this,'tam','PP')">PP</button>
+  <button class="seg-btn" data-filter="tam" data-val="P"    onclick="filtrar(this,'tam','P')">P</button>
+  <button class="seg-btn" data-filter="tam" data-val="M"    onclick="filtrar(this,'tam','M')">M</button>
+  <button class="seg-btn" data-filter="tam" data-val="G"    onclick="filtrar(this,'tam','G')">G</button>
+  <button class="seg-btn" data-filter="tam" data-val="GG"   onclick="filtrar(this,'tam','GG')">GG</button>
+  <button class="seg-btn" data-filter="tam" data-val="EXG"  onclick="filtrar(this,'tam','EXG')">EXG</button>
+  <button class="seg-btn" data-filter="tam" data-val="ÚNICO" onclick="filtrar(this,'tam','ÚNICO')">Único</button>
   <div class="filter-divider"></div>
   <span class="filter-label">Estilo:</span>
-  <button class="seg-btn active" data-filter="est" data-val="todos" onclick="filtrar(this,'est','todos')">Todos</button>
-  <button class="seg-btn" data-filter="est" data-val="Redondo" onclick="filtrar(this,'est','Redondo')">Redondo</button>
-  <button class="seg-btn" data-filter="est" data-val="Coração" onclick="filtrar(this,'est','Coração')">Coração</button>
+  <button class="seg-btn active" data-filter="est" data-val="todos"       onclick="filtrar(this,'est','todos')">Todos</button>
+  <button class="seg-btn" data-filter="est" data-val="Redondo"            onclick="filtrar(this,'est','Redondo')">Redondo</button>
+  <button class="seg-btn" data-filter="est" data-val="Coração"            onclick="filtrar(this,'est','Coração')">Coração</button>
+  <button class="seg-btn" data-filter="est" data-val="Estampado"          onclick="filtrar(this,'est','Estampado')">Estampado</button>
+  <button class="seg-btn" data-filter="est" data-val="Cama Camping"       onclick="filtrar(this,'est','Cama Camping')">Cama Camping</button>
+  <button class="seg-btn" data-filter="est" data-val="Kit"                onclick="filtrar(this,'est','Kit')">Kit Guia</button>
+  <button class="seg-btn" data-filter="est" data-val="MDF"                onclick="filtrar(this,'est','MDF')">MDF</button>
+  <button class="seg-btn" data-filter="est" data-val="ArranhaFix"         onclick="filtrar(this,'est','ArranhaFix')">ArranhaFix</button>
+  <button class="seg-btn" data-filter="est" data-val="Fibra Siliconada"   onclick="filtrar(this,'est','Fibra Siliconada')">Fibra Siliconada</button>
   <span class="sort-hint">Clique no cabeçalho para ordenar</span>
 </div>
 
@@ -262,6 +281,7 @@ footer a{color:var(--accent);text-decoration:none;}
       <thead>
         <tr>
           <th class="sortable" data-col="ref"     onclick="sortBy(this)"><div class="th-inner">Ref <span class="sort-icon">&#x21c5;</span></div></th>
+          <th class="sortable" data-col="cat"     onclick="sortBy(this)"><div class="th-inner">Categoria <span class="sort-icon">&#x21c5;</span></div></th>
           <th class="sortable" data-col="estilo"  onclick="sortBy(this)"><div class="th-inner">Estilo <span class="sort-icon">&#x21c5;</span></div></th>
           <th class="sortable" data-col="cor"     onclick="sortBy(this)"><div class="th-inner">Cor <span class="sort-icon">&#x21c5;</span></div></th>
           <th class="sortable" data-col="tam"     onclick="sortBy(this)"><div class="th-inner">Tam. <span class="sort-icon">&#x21c5;</span></div></th>
@@ -284,30 +304,71 @@ footer a{color:var(--accent);text-decoration:none;}
 </footer>
 
 <script>
-var TAM_ORDER = {M:1,G:2,GG:3,EXG:4};
+var TAM_ORDER = {PP:0,P:1,M:2,G:3,GG:4,EXG:5,"ÚNICO":6};
 var products = [
-  {ref:"A1",estilo:"Redondo",cor:"Cinza",tam:"EXG",sellout:109.90,base:52.14},
-  {ref:"A2",estilo:"Redondo",cor:"Preto",tam:"EXG",sellout:109.90,base:52.14},
-  {ref:"A5",estilo:"Coração",cor:"Cinza",tam:"EXG",sellout:109.90,base:52.14},
-  {ref:"A6",estilo:"Coração",cor:"Preto",tam:"EXG",sellout:109.90,base:52.14},
-  {ref:"A1",estilo:"Redondo",cor:"Cinza",tam:"GG", sellout:78.90, base:43.57},
-  {ref:"A2",estilo:"Redondo",cor:"Preto",tam:"GG", sellout:78.90, base:43.57},
-  {ref:"A5",estilo:"Coração",cor:"Cinza",tam:"GG", sellout:78.90, base:43.57},
-  {ref:"A6",estilo:"Coração",cor:"Preto",tam:"GG", sellout:78.90, base:43.57},
-  {ref:"A1",estilo:"Redondo",cor:"Cinza",tam:"G",  sellout:54.90, base:29.08},
-  {ref:"A2",estilo:"Redondo",cor:"Preto",tam:"G",  sellout:54.90, base:29.08},
-  {ref:"A5",estilo:"Coração",cor:"Cinza",tam:"G",  sellout:54.90, base:29.08},
-  {ref:"A6",estilo:"Coração",cor:"Preto",tam:"G",  sellout:54.90, base:29.08},
-  {ref:"A1",estilo:"Redondo",cor:"Cinza",tam:"M",  sellout:42.90, base:22.83},
-  {ref:"A2",estilo:"Redondo",cor:"Preto",tam:"M",  sellout:42.90, base:22.83},
-  {ref:"A5",estilo:"Coração",cor:"Cinza",tam:"M",  sellout:42.90, base:22.83},
-  {ref:"A6",estilo:"Coração",cor:"Preto",tam:"M",  sellout:42.90, base:22.83}
+  // ── COLETOR DE AREIA ─────────────────────────────────────────────────────
+  {cat:"Coletor de Areia",ref:"A1",estilo:"Redondo",cor:"Cinza", tam:"M",  sellout:42.90, base:24.81},
+  {cat:"Coletor de Areia",ref:"A1",estilo:"Redondo",cor:"Cinza", tam:"G",  sellout:54.90, base:31.61},
+  {cat:"Coletor de Areia",ref:"A1",estilo:"Redondo",cor:"Cinza", tam:"GG", sellout:78.90, base:47.36},
+  {cat:"Coletor de Areia",ref:"A1",estilo:"Redondo",cor:"Cinza", tam:"EXG",sellout:109.90,base:56.67},
+  {cat:"Coletor de Areia",ref:"A2",estilo:"Redondo",cor:"Preto", tam:"M",  sellout:42.90, base:24.81},
+  {cat:"Coletor de Areia",ref:"A2",estilo:"Redondo",cor:"Preto", tam:"G",  sellout:54.90, base:31.61},
+  {cat:"Coletor de Areia",ref:"A2",estilo:"Redondo",cor:"Preto", tam:"GG", sellout:78.90, base:47.36},
+  {cat:"Coletor de Areia",ref:"A2",estilo:"Redondo",cor:"Preto", tam:"EXG",sellout:109.90,base:56.67},
+  {cat:"Coletor de Areia",ref:"A5",estilo:"Coração", cor:"Cinza", tam:"M",  sellout:42.90, base:24.81},
+  {cat:"Coletor de Areia",ref:"A5",estilo:"Coração", cor:"Cinza", tam:"G",  sellout:54.90, base:31.61},
+  {cat:"Coletor de Areia",ref:"A5",estilo:"Coração", cor:"Cinza", tam:"GG", sellout:78.90, base:47.36},
+  {cat:"Coletor de Areia",ref:"A5",estilo:"Coração", cor:"Cinza", tam:"EXG",sellout:109.90,base:56.67},
+  {cat:"Coletor de Areia",ref:"A6",estilo:"Coração", cor:"Preto", tam:"M",  sellout:42.90, base:24.81},
+  {cat:"Coletor de Areia",ref:"A6",estilo:"Coração", cor:"Preto", tam:"G",  sellout:54.90, base:31.61},
+  {cat:"Coletor de Areia",ref:"A6",estilo:"Coração", cor:"Preto", tam:"GG", sellout:78.90, base:47.36},
+  {cat:"Coletor de Areia",ref:"A6",estilo:"Coração", cor:"Preto", tam:"EXG",sellout:109.90,base:56.67},
+  {cat:"Coletor de Areia",ref:"A9",estilo:"Estampado",cor:"Lançamento",tam:"M",  sellout:52.90, base:28.03},
+  {cat:"Coletor de Areia",ref:"A9",estilo:"Estampado",cor:"Lançamento",tam:"G",  sellout:58.90, base:36.28},
+  {cat:"Coletor de Areia",ref:"A9",estilo:"Estampado",cor:"Lançamento",tam:"EXG",sellout:119.90,base:61.14},
+  // ── CAMA / COLCHONETE ────────────────────────────────────────────────────
+  {cat:"Cama / Colchonete",ref:"A32",estilo:"Cama Camping",cor:"Cappuccino",   tam:"M",sellout:78.90, base:48.57},
+  {cat:"Cama / Colchonete",ref:"A32",estilo:"Cama Camping",cor:"Cappuccino",   tam:"G",sellout:99.90, base:57.30},
+  {cat:"Cama / Colchonete",ref:"A33",estilo:"Cama Camping",cor:"Cinza Grafite",tam:"M",sellout:78.90, base:48.57},
+  {cat:"Cama / Colchonete",ref:"A33",estilo:"Cama Camping",cor:"Cinza Grafite",tam:"G",sellout:99.90, base:57.30},
+  {cat:"Cama / Colchonete",ref:"A34",estilo:"Cama Camping",cor:"Caramelo",     tam:"M",sellout:78.90, base:48.57},
+  {cat:"Cama / Colchonete",ref:"A34",estilo:"Cama Camping",cor:"Caramelo",     tam:"G",sellout:99.90, base:57.30},
+  {cat:"Cama / Colchonete",ref:"A35",estilo:"Cama Camping",cor:"Rosa",         tam:"M",sellout:78.90, base:48.57},
+  {cat:"Cama / Colchonete",ref:"A35",estilo:"Cama Camping",cor:"Rosa",         tam:"G",sellout:99.90, base:57.30},
+  // ── ARRANHADOR ───────────────────────────────────────────────────────────
+  {cat:"Arranhador",ref:"A36",estilo:"MDF",        cor:"Juta Natural",  tam:"ÚNICO",sellout:54.90, base:33.67},
+  {cat:"Arranhador",ref:"A37",estilo:"MDF",        cor:"Marrom Carpete",tam:"ÚNICO",sellout:54.90, base:32.84},
+  {cat:"Arranhador",ref:"A9", estilo:"ArranhaFix", cor:"Juta Natural",  tam:"ÚNICO",sellout:19.90, base:11.54},
+  {cat:"Arranhador",ref:"A9", estilo:"ArranhaFix", cor:"Juta Natural",  tam:"ÚNICO",sellout:39.90, base:23.07},
+  {cat:"Arranhador",ref:"A9", estilo:"ArranhaFix", cor:"Juta Natural",  tam:"ÚNICO",sellout:79.90, base:46.14},
+  // ── GUIA E PEITORAL ──────────────────────────────────────────────────────
+  {cat:"Guia e Peitoral",ref:"A45",estilo:"Kit",cor:"Onça",    tam:"P",sellout:49.90,base:26.43},
+  {cat:"Guia e Peitoral",ref:"A45",estilo:"Kit",cor:"Onça",    tam:"M",sellout:49.90,base:26.43},
+  {cat:"Guia e Peitoral",ref:"A45",estilo:"Kit",cor:"Onça",    tam:"G",sellout:49.90,base:26.43},
+  {cat:"Guia e Peitoral",ref:"A46",estilo:"Kit",cor:"Pink",    tam:"P",sellout:49.90,base:26.43},
+  {cat:"Guia e Peitoral",ref:"A46",estilo:"Kit",cor:"Pink",    tam:"M",sellout:49.90,base:26.43},
+  {cat:"Guia e Peitoral",ref:"A46",estilo:"Kit",cor:"Pink",    tam:"G",sellout:49.90,base:26.43},
+  {cat:"Guia e Peitoral",ref:"A47",estilo:"Kit",cor:"Preto",   tam:"P",sellout:49.90,base:26.43},
+  {cat:"Guia e Peitoral",ref:"A47",estilo:"Kit",cor:"Preto",   tam:"M",sellout:49.90,base:26.43},
+  {cat:"Guia e Peitoral",ref:"A47",estilo:"Kit",cor:"Preto",   tam:"G",sellout:49.90,base:26.43},
+  {cat:"Guia e Peitoral",ref:"A48",estilo:"Kit",cor:"Azul",    tam:"P",sellout:49.90,base:26.43},
+  {cat:"Guia e Peitoral",ref:"A48",estilo:"Kit",cor:"Azul",    tam:"M",sellout:49.90,base:26.43},
+  {cat:"Guia e Peitoral",ref:"A48",estilo:"Kit",cor:"Azul",    tam:"G",sellout:49.90,base:26.43},
+  {cat:"Guia e Peitoral",ref:"A49",estilo:"Kit",cor:"Vermelho",tam:"P",sellout:49.90,base:26.43},
+  {cat:"Guia e Peitoral",ref:"A49",estilo:"Kit",cor:"Vermelho",tam:"M",sellout:49.90,base:26.43},
+  {cat:"Guia e Peitoral",ref:"A49",estilo:"Kit",cor:"Vermelho",tam:"G",sellout:49.90,base:26.43},
+  // ── COLAR ELIZABETANO ────────────────────────────────────────────────────
+  {cat:"Colar Elizabetano",ref:"—",estilo:"Fibra Siliconada",cor:"Abacate",tam:"PP", sellout:null,  base:null},
+  {cat:"Colar Elizabetano",ref:"—",estilo:"Fibra Siliconada",cor:"Abacate",tam:"P",  sellout:44.90, base:19.58},
+  {cat:"Colar Elizabetano",ref:"—",estilo:"Fibra Siliconada",cor:"Abacate",tam:"M",  sellout:54.90, base:23.88},
+  {cat:"Colar Elizabetano",ref:"—",estilo:"Fibra Siliconada",cor:"Abacate",tam:"G",  sellout:64.90, base:28.50},
+  {cat:"Colar Elizabetano",ref:"—",estilo:"Fibra Siliconada",cor:"Abacate",tam:"GG", sellout:69.90, base:31.64}
 ];
 
 var qtdMap = {};
 var sortCol = null;
 var sortDir = 1;
-var activeFilters = {tam:"todos",est:"todos"};
+var activeFilters = {tam:"todos",est:"todos",cat:"todos"};
 
 function fmtBRL(v){
   return "R$ " + v.toFixed(2).replace(".",",").replace(/\B(?=(\d{3})+(?!\d))/g,".");
@@ -328,40 +389,50 @@ function buildTable(data){
     var p = item.p;
     var origIdx = item.origIdx;
     var q = qtdMap[origIdx] || 0;
-    var disc = getDiscount(q);
-    var total = q > 0 ? p.base*(1-disc.pct)*q : 0;
-    var p10 = p.base*0.90;
-    var p30 = p10*0.95;
-    var p50 = p30*0.95;
+    var hasPrice = p.base !== null && p.base !== undefined;
+    var disc = hasPrice ? getDiscount(q) : {pct:0,label:""};
+    var total = (hasPrice && q > 0) ? p.base*(1-disc.pct)*q : 0;
+    var p10 = hasPrice ? p.base*0.90 : null;
+    var p30 = hasPrice ? p10*0.95 : null;
+    var p50 = hasPrice ? p30*0.95 : null;
     var active = "base";
     if(q>=50) active="50";
     else if(q>=30) active="30";
     else if(q>=10) active="10";
 
     function tierCls(tier){
-      if(q===0) return "";
+      if(q===0||!hasPrice) return "";
       return tier===active ? " tier-active" : " tier-inactive";
     }
 
     var tr = document.createElement("tr");
-    if(q>0){tr.classList.add("has-qty");}
+    if(q>0&&hasPrice){tr.classList.add("has-qty");}
     else{tr.classList.add("no-qty");}
 
-    var totHtml = q>0 ? fmtBRL(total) : "&mdash;";
-    var totCls  = q>0 ? "td-total" : "td-total empty";
+    var totHtml = (hasPrice && q>0) ? fmtBRL(total) : "&mdash;";
+    var totCls  = (hasPrice && q>0) ? "td-total" : "td-total empty";
+
+    var soHtml  = (p.sellout !== null && p.sellout !== undefined) ? fmtBRL(p.sellout) : "&mdash;";
+    var baseHtml= hasPrice ? fmtBRL(p.base) : "&mdash;";
+    var p10Html = hasPrice ? fmtBRL(p10)+"<span class=\"disc\">-10%</span>" : "&mdash;";
+    var p30Html = hasPrice ? fmtBRL(p30)+"<span class=\"disc\">-14,5%</span>" : "&mdash;";
+    var p50Html = hasPrice ? fmtBRL(p50)+"<span class=\"disc\">-18,78%</span>" : "&mdash;";
 
     tr.innerHTML =
       "<td class=\"ref\">"+p.ref+"</td>"+
+      "<td class=\"detail cat-col\">"+p.cat+"</td>"+
       "<td class=\"detail\">"+p.estilo+"</td>"+
       "<td class=\"detail\">"+p.cor+"</td>"+
       "<td class=\"tam\"><span>"+p.tam+"</span></td>"+
-      "<td class=\"sellout\">"+fmtBRL(p.sellout)+"</td>"+
-      "<td class=\"price-col"+tierCls("base")+"\" data-rowidx=\""+origIdx+"\" data-tier=\"base\">"+fmtBRL(p.base)+"</td>"+
-      "<td class=\"price-col th-10"+tierCls("10")+"\" data-rowidx=\""+origIdx+"\" data-tier=\"10\">"+fmtBRL(p10)+"<span class=\"disc\">-10%</span></td>"+
-      "<td class=\"price-col th-30"+tierCls("30")+"\" data-rowidx=\""+origIdx+"\" data-tier=\"30\">"+fmtBRL(p30)+"<span class=\"disc\">-14,5%</span></td>"+
-      "<td class=\"price-col th-50"+tierCls("50")+"\" data-rowidx=\""+origIdx+"\" data-tier=\"50\">"+fmtBRL(p50)+"<span class=\"disc\">-18,78%</span></td>"+
-      "<td class=\"td-qty no-print\"><input class=\"qty-input"+(q>0?" filled":"")+"\" type=\"number\" min=\"0\" value=\""+(q>0?q:"")+"\" placeholder=\"0\" data-origidx=\""+origIdx+"\" oninput=\"onQtyChange(this)\"></td>"+
-      "<td class=\"qty-print\">"+( q>0 ? q : "" )+"</td>"+
+      "<td class=\"sellout\">"+soHtml+"</td>"+
+      "<td class=\"price-col"+tierCls("base")+"\" data-rowidx=\""+origIdx+"\" data-tier=\"base\">"+baseHtml+"</td>"+
+      "<td class=\"price-col th-10"+tierCls("10")+"\" data-rowidx=\""+origIdx+"\" data-tier=\"10\">"+p10Html+"</td>"+
+      "<td class=\"price-col th-30"+tierCls("30")+"\" data-rowidx=\""+origIdx+"\" data-tier=\"30\">"+p30Html+"</td>"+
+      "<td class=\"price-col th-50"+tierCls("50")+"\" data-rowidx=\""+origIdx+"\" data-tier=\"50\">"+p50Html+"</td>"+
+      "<td class=\"td-qty no-print\">"+
+        (hasPrice ? "<input class=\"qty-input"+(q>0?" filled":"")+"\" type=\"number\" min=\"0\" value=\""+(q>0?q:"")+"\" placeholder=\"0\" data-origidx=\""+origIdx+"\" oninput=\"onQtyChange(this)\">" : "<span style=\"color:var(--muted);font-size:.7rem\">em breve</span>")+
+      "</td>"+
+      "<td class=\"qty-print\">"+( (hasPrice&&q>0) ? q : "" )+"</td>"+
       "<td class=\""+totCls+"\" id=\"tot-"+origIdx+"\">"+totHtml+"</td>";
 
     tb.appendChild(tr);
@@ -376,6 +447,7 @@ function onQtyChange(input){
   if(q>0){qtdMap[origIdx]=q;input.classList.add("filled");}
   else{delete qtdMap[origIdx];input.classList.remove("filled");}
   var p = products[origIdx];
+  if(!p||p.base===null||p.base===undefined) return;
   var disc = getDiscount(q);
   var total = q>0 ? p.base*(1-disc.pct)*q : 0;
   var totCell = document.getElementById("tot-"+origIdx);
@@ -411,11 +483,11 @@ function updateResumo(){
   Object.keys(qtdMap).forEach(function(idx){
     var q=qtdMap[idx];
     var p=products[parseInt(idx)];
-    if(!p||q<=0) return;
+    if(!p||q<=0||p.base===null||p.base===undefined) return;
     var disc=getDiscount(q);
     itens++;pecas+=q;
     investimento+=p.base*(1-disc.pct)*q;
-    selloutTotal+=p.sellout*q;
+    if(p.sellout!==null&&p.sellout!==undefined) selloutTotal+=p.sellout*q;
     totalBase+=p.base*q;
     totalDesc+=disc.pct*p.base*q;
   });
@@ -445,7 +517,39 @@ function filtrar(btn,filterType,val){
   document.querySelectorAll(".seg-btn[data-filter=\""+filterType+"\"]").forEach(function(b){b.classList.remove("active");});
   btn.classList.add("active");
   activeFilters[filterType]=val;
+  // se mudou categoria, reseta subcategorias para "todos"
+  if(filterType==="cat"){
+    activeFilters.tam="todos";
+    activeFilters.est="todos";
+    document.querySelectorAll(".seg-btn[data-filter=\"tam\"]").forEach(function(b){b.classList.remove("active");if(b.dataset.val==="todos")b.classList.add("active");});
+    document.querySelectorAll(".seg-btn[data-filter=\"est\"]").forEach(function(b){b.classList.remove("active");if(b.dataset.val==="todos")b.classList.add("active");});
+  }
+  syncSubFilters();
   renderSorted();
+}
+
+function syncSubFilters(){
+  var catFilter = activeFilters.cat;
+  // coleta os valores disponíveis na categoria selecionada
+  var availTam = {}, availEst = {};
+  products.forEach(function(p){
+    if(catFilter==="todos" || p.cat===catFilter){
+      availTam[p.tam]=true;
+      availEst[p.estilo]=true;
+    }
+  });
+  document.querySelectorAll(".seg-btn[data-filter=\"tam\"]").forEach(function(b){
+    var v=b.dataset.val;
+    if(v==="todos"){ b.classList.remove("disabled"); b.removeAttribute("disabled"); return; }
+    if(availTam[v]){ b.classList.remove("disabled"); b.removeAttribute("disabled"); }
+    else{ b.classList.add("disabled"); b.setAttribute("disabled",""); }
+  });
+  document.querySelectorAll(".seg-btn[data-filter=\"est\"]").forEach(function(b){
+    var v=b.dataset.val;
+    if(v==="todos"){ b.classList.remove("disabled"); b.removeAttribute("disabled"); return; }
+    if(availEst[v]){ b.classList.remove("disabled"); b.removeAttribute("disabled"); }
+    else{ b.classList.add("disabled"); b.setAttribute("disabled",""); }
+  });
 }
 
 function sortBy(th){
@@ -468,15 +572,16 @@ function renderSorted(){
   data = data.filter(function(item){
     var tOk = activeFilters.tam==="todos" || item.p.tam===activeFilters.tam;
     var eOk = activeFilters.est==="todos" || item.p.estilo===activeFilters.est;
-    return tOk && eOk;
+    var cOk = activeFilters.cat==="todos" || item.p.cat===activeFilters.cat;
+    return tOk && eOk && cOk;
   });
   if(sortCol){
     data.sort(function(a,b){
       var va,vb,pa=a.p,pb=b.p;
-      if(sortCol==="p10"){va=pa.base*0.90;vb=pb.base*0.90;}
-      else if(sortCol==="p30"){va=pa.base*0.90*0.95;vb=pb.base*0.90*0.95;}
-      else if(sortCol==="p50"){va=pa.base*0.90*0.95*0.95;vb=pb.base*0.90*0.95*0.95;}
-      else if(sortCol==="tam"){va=TAM_ORDER[pa.tam]||99;vb=TAM_ORDER[pb.tam]||99;}
+      if(sortCol==="p10"){va=pa.base!==null?pa.base*0.90:-1;vb=pb.base!==null?pb.base*0.90:-1;}
+      else if(sortCol==="p30"){va=pa.base!==null?pa.base*0.90*0.95:-1;vb=pb.base!==null?pb.base*0.90*0.95:-1;}
+      else if(sortCol==="p50"){va=pa.base!==null?pa.base*0.90*0.95*0.95:-1;vb=pb.base!==null?pb.base*0.90*0.95*0.95:-1;}
+      else if(sortCol==="tam"){va=TAM_ORDER[pa.tam]!==undefined?TAM_ORDER[pa.tam]:99;vb=TAM_ORDER[pb.tam]!==undefined?TAM_ORDER[pb.tam]:99;}
       else{va=pa[sortCol];vb=pb[sortCol];}
       if(typeof va==="string") return va.localeCompare(vb,"pt-BR")*sortDir;
       return (va-vb)*sortDir;
@@ -517,6 +622,7 @@ window.addEventListener("afterprint",function(){
   document.querySelectorAll("tbody tr.no-qty").forEach(function(tr){tr.style.removeProperty("display");});
 });
 
+syncSubFilters();
 renderSorted();
 </script>
 </body>
